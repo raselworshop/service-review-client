@@ -1,22 +1,64 @@
 import React from 'react';
 import { FaCloud } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
-    const { user } = UseAuth();
+    const { user, signOutUser } = UseAuth();
+    const navigate = useNavigate();
     const links = <>
         <li><Link to={'/'}>Home</Link></li>
-        <li><Link to={'/signin'}>Sign In</Link></li>
+        <li><a href="#services">Services</a></li>
+        {!user && (<>
+            <li><Link to={'/signin'}>Sign In</Link></li>
+            <li><Link to={'/signup'}>Sign Up</Link></li>
+        </>
+        )}
     </>
+
+    const handleSignOut = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Log Out!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                signOutUser()
+                    .then(() => {
+                        Swal.fire({
+                            title: "Logged Out!",
+                            text: "You're logged out.",
+                            icon: "success"
+                        });
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: `${error.message}`,
+                            icon: "error"
+                        });
+                    })
+            }
+        });
+    }
     return (
         <div className="navbar bg-blue-700/20">
             <div className="navbar-start lg:pl-5">
 
                 <div className='flex items-center justify-center'>
-                    <span><FaCloud className='text-green-700 text-2xl lg:hidden mr-2' /> </span>
-                    <a className="hover mr-2 font-bold text-2xl  md:text-3xl lg:text-4xl">Service Review</a>
-                    <span><FaCloud className='text-green-700 text-2xl hidden lg:block  md:text-3xl lg:text-4xl' /> </span>
+                    <Link to={'/'} className='flex items-center justify-center'>
+                        <span><FaCloud className='text-green-700 text-2xl lg:hidden mr-2' /> </span>
+                        <span className="hover mr-2 font-bold text-2xl  md:text-3xl lg:text-4xl">Service Review</span>
+                        <span>
+                            <FaCloud className='text-green-700 text-2xl hidden lg:block  md:text-3xl lg:text-4xl' />
+                        </span>
+                    </Link>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -70,24 +112,39 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow">
                         {/* profile info  */}
                         <div className='p-4 rounded my-2 bg-gray-500'>
-                            <Link className=' flex items-center justify-between' to={'/profile'}> <span>Profile</span>
-                                <img className='bg-white/20 w-8 h-8 rounded-full' src={user?.photoURL} alt="" />
+                            <Link className=' flex items-center justify-between' to={'/profile'}> <span>{user? user.displayName : "Profile"}</span>
+                                <img className='bg-white/20 w-8 h-8 rounded-full' src={user?.photoURL || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
                             </Link>
                         </div>
                         {links}
                     </ul>
                 </div>
                 {/* profile info */}
-                <div className='hidden lg:flex'>
-                    <div className='flex items-center justify-between'>
+                <div className='hidden lg:flex relative'>
+                    <div className='flex items-center justify-between group'>
                         <Link to={'/profile'}>
-                            {!user?.photoURL ? <span>Profile</span> :
+                            {!user?.photoURL ? <img className='w-10 h-10 rounded-lg' src="https://i.ibb.co/9r0LmCV/boy1.png" alt="" /> :
                                 <img className='w-10 h-10 rounded-lg' src={user?.photoURL} alt="" />
                             }
                         </Link>
+                        {user && (
+                            <div className='hidden group-hover:block absolute top-8 right-0 bg-white shadow-lg rounded-lg p-4 z-10'>
+                                <div className='flex items-center justify-between mb-2 tooltip tooltip-left' data-tip="Click to move profile page">
+                                    <span>{user?.displayName}</span>
+                                    <Link to={'/profile'}>
+                                        <img className='w-10 h-10 rounded-lg'
+                                            src={user?.photoURL || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="User Profile" />
+                                    </Link>
+                                </div>
+                                <button className='btn btn-danger'
+                                    onClick={handleSignOut}>
+                                    Logout
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div >

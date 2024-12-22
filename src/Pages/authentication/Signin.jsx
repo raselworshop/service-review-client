@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../public/serviceLogo.jpg'
+import logo from '/serviceLogo.jpg'
 import { Link } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import toast from 'react-hot-toast';

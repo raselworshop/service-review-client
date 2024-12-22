@@ -5,6 +5,8 @@ import Home from "../Pages/Home";
 import Signin from "../Pages/authentication/Signin";
 import Signup from "../Pages/authentication/Signup";
 import Profile from "../Pages/Profile";
+import AddService from "../Pages/AddService";
+import AllServices from "../Pages/AllServices";
 
 const router = createBrowserRouter([
     {
@@ -26,7 +28,15 @@ const router = createBrowserRouter([
         },
         {
           path: 'profile',
-          element:<Profile></Profile>
+          element:<Profile></Profile>,
+        },
+        {
+          path: 'addservice',
+          element: <AddService></AddService>,
+        },
+        {
+          path: 'services',
+          element: <AllServices></AllServices>
         }
       ]
     },

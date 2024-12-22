@@ -1,22 +1,22 @@
-import React from 'react';
-import logo from '../../../public/serviceLogo.jpg'
+import React, { useState } from 'react';
+import logo from '/serviceLogo.jpg'
 import { Link } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import Spinner from '../../Component/spinner/Spinner';
 const Signup = () => {
     const { createUser, signinWithPop, loading, setLoading, setUser, updateUserProfile } = UseAuth();
+    const [passError, setPassError] = useState('')
     const handleGoogleSignIn = async () => {
         try {
-            await signinWithPop()
-                .then(result => {
-                    const user = result.user;
-                    console.log(user)
-                    if (user) {
-                        toast.success("User successfully signed in!")
-                    }
-                    console.log("Google signin")
-                })
+            const result = await signinWithPop()
+            const user = result.user;
+            console.log(user)
+            if (user) {
+                toast.success("User successfully signed in!")
+            }
+            console.log("Google signin")
+
         } catch (error) {
             console.log("User unsuccesfull to signed in, please try again!")
             toast.error(error.message)
@@ -36,6 +36,11 @@ const Signup = () => {
             name, photo, email, password,
         }
         console.log('Comming soon email pass', userData);
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            return setPassError('Password must be at least 6charecter longer, one uppercase and one lowercase')
+        } else { setPassError('') }
+
         try {
             const result = await createUser(email, password);
             await updateUserProfile(name, photo)
@@ -173,6 +178,7 @@ const Signup = () => {
                                 type='password'
                             />
                         </div>
+                        {passError && <p className='text-xs text-red-500'>{passError}</p>}
                         <div className='mt-6'>
                             <button
                                 type='submit'
