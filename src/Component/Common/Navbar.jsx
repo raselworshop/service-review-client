@@ -20,6 +20,7 @@ const Navbar = () => {
         </li>
         <li><Link to={'/addservice'}>Add Service</Link></li>
         <li><Link to={'/my-reviews'}>My Reviews</Link></li>
+        <li><Link to={'/my-services'}>My Services</Link></li>
         {!user && (<>
             <li><Link to={'/signin'}>Sign In</Link></li>
             <li><Link to={'/signup'}>Sign Up</Link></li>
@@ -95,7 +96,7 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end lg:pr-5">
+            <div className="navbar-end w-1/3 lg:pr-5">
                 {/* for mobile: search impleament */}
                 <div className='md:hidden mr-3'>
                     <svg
