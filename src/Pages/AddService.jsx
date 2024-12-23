@@ -14,13 +14,13 @@ const AddService = () => {
     const currentDate = format(new Date(), 'yyyy-MM-dd')
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`http://localhost:5000/user/add/service`, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/add/service`, {
                 ...data,
                 userEmail: user.email,
                 addedDate: currentDate,
                 ratings: [],
-                reviewText: "",
             });
+            toast.success('Service added successfully!')
             if (response.status === 201) {
                 console.log(response)
                 toast.success('Service added successfully!')

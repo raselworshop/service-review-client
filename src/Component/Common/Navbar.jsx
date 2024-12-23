@@ -1,17 +1,25 @@
 import React from 'react';
 import { FaCloud } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
 import { motion } from "motion/react"
 
 const Navbar = () => {
     const { user, signOutUser } = UseAuth();
+    const location = useLocation();
     const navigate = useNavigate();
     const links = <>
         <li><Link to={'/'}>Home</Link></li>
-        <li><a href="#services">Services</a></li>
+        <li>
+            { location.pathname === '/'? (
+            <a href="#services">Services</a>):(
+                <Link to={'/services'}>Services</Link>
+            )
+        }
+        </li>
         <li><Link to={'/addservice'}>Add Service</Link></li>
+        <li><Link to={'/my-reviews'}>My Reviews</Link></li>
         {!user && (<>
             <li><Link to={'/signin'}>Sign In</Link></li>
             <li><Link to={'/signup'}>Sign Up</Link></li>

@@ -8,6 +8,7 @@ import Profile from "../Pages/Profile";
 import AddService from "../Pages/AddService";
 import AllServices from "../Pages/AllServices";
 import ServiceDetails from "../Pages/ServiceDetails";
+import MyReviews from "../Pages/Userbased/MyReviews";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         {
           path: 'service-details/:serviceId',
           element: <ServiceDetails></ServiceDetails>
+        },
+        {
+          path: 'my-reviews',
+          element: <MyReviews></MyReviews>
         }
       ]
     },

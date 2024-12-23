@@ -5,7 +5,8 @@ import toast from 'react-hot-toast';
 import UseAuth from '../../Hooks/UseAuth';
 import axios from 'axios';
 
-const AddReview = ({ serviceId }) => {
+const AddReview = ({ service, refetchServiceDetails }) => {
+    console.log(service.title)
     const { user } = UseAuth();
     const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
     const [rating, setRating] = useState(0)
@@ -19,18 +20,29 @@ const AddReview = ({ serviceId }) => {
                 reviewDate: currentDate,
                 review : data.review,
                 rating: rating,
+                serviceTitle: service.title, //here not adding in backend
+                email : user.email,
                 photo: user.photoURL || user.photo,
                 Name: user.displayName || user.name,
+                serviceId: service._id,
             }
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/services/rating/${serviceId}`, reviewData);
-            toast.dismiss(toastId)
+            console.log(service.title) // is ok
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, reviewData)
+            if (res.status === 201) {
+                console.log('review add successful')
+                refetchServiceDetails();
+            }
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/services/rating/${service._id}`, reviewData);
             if (response.status === 201) {
-                toast.success('Review added successfully!');
-                reset();
+                console.log('rating added successfully')
+                refetchServiceDetails()
             }
+            toast.dismiss(toastId)
+            toast.success('Review added successfully!');
+            reset();
         } catch (error) {
             toast.dismiss(toastId)
-            toast.error('Failed to add review. Please try again.');
+            toast.error(error.message);
         }
     };
 

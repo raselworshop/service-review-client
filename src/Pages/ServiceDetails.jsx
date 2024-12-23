@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import UseAuth from '../Hooks/UseAuth';
 import Spinner from '../Component/spinner/Spinner';
 import AddReview from '../Component/Shared/AddReview';
@@ -16,34 +16,36 @@ const ServiceDetails = () => {
     const [service, setService] = useState(null);
     const [error, setError] = useState('');
     const [ratingStats, setRatingState] = useState({});
+    const navigate = useNavigate()
 
-
+    const fetchServiceDetails = async () => {
+        try {
+            setLoading(true)
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`)
+            console.log("response logged", response)
+            setService(response.data)
+        } catch (error) {
+            console.log(error)
+            setError(error.message)
+        } finally {
+            setLoading(false)
+        }
+    };
     useEffect(() => {
-        const fetchServiceDetails = async () => {
-            try {
-                setLoading(true)
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`)
-                console.log("response logged", response)
-                setService(response.data)
-            } catch (error) {
-                console.log(error)
-                setError(error.message)
-            } finally {
-                setLoading(false)
-            }
-        };
         fetchServiceDetails();
     }, [serviceId]);
     useEffect(() => {
         if (service?.ratings?.length) {
             const ratingStats = service.ratings.reduce((acc, curr) => {
-                acc[curr] = (acc[curr] || 0) + 1;
+                acc[curr.rating] = (acc[curr.rating] || 0) + 1;
                 return acc;
             }, {});
             setRatingState(ratingStats);
         }
     }, [service?.ratings]);
-
+const handleEditReview =(reviewId)=>{
+    navigate(`/my-reviews`)
+}
 
     if (loading || !service) return <Spinner />;
     if (error) return <div>Error: {error}</div>;
@@ -71,7 +73,7 @@ const ServiceDetails = () => {
                                 target="_blank" rel="noopener noreferrer">{service.website}</a>
                             <p className="text-gray-600 mb-2">
                                 Added on: {format(new Date(service.addedDate), 'yyyy-MM-dd')}</p>
-                            {/* <p className="text-gray-600 mb-2">Service Rating: {service.rating || '0'}</p> */}
+                            
                             <p className="text-gray-600 mb-2">User Email: {service.userEmail}</p>
                         </div>
                         <div className="mt-6">
@@ -85,13 +87,16 @@ const ServiceDetails = () => {
                             </ul>
                         </div>
                         <div className='flex flex-col items-start lg:items-center lg:justify-center'>
-                            <img className='p-3 w-60 rounded-lg' src={service.image || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
+                            <img className='p-3 w-60 rounded-lg' 
+                            referrerPolicy='no-referrer'
+                            src={service.image || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
                             <h3>{service.title || "Annonymous"}</h3>
                         </div>
                     </div>
                 </div>
                 <div className='md:w-1/3'>
-                    <h2 className="text-2xl font-bold mb-4">Add a Review</h2> <AddReview serviceId={serviceId} />
+                    <h2 className="text-2xl font-bold mb-4">Add a Review</h2>
+                    <AddReview refetchServiceDetails={fetchServiceDetails} service={service} />
                 </div>
             </div>
             <div className='my-8'>
@@ -102,31 +107,35 @@ const ServiceDetails = () => {
                         <h3 className="text-xl font-semibold mb-4">Ratings & Reviews</h3>
                         {service.ratings.length > 0 ? (
                             service.ratings.map((review, index) => (
-                                <div key={index} className="review mb-6 p-4 border-b border-gray-300">
-                                    <div className="review-header flex items-center mb-4">
-                                        <img src={review.photo} alt="User" className="user-photo w-12 h-12 rounded-full mr-4" />
-                                        <div>
-                                            <h4 className="text-lg font-medium">{review.Name}</h4>
-                                            <span className="text-sm text-gray-500">{review.reviewDate}</span>
+                                <div key={index} className="review md:flex items-center mb-6 p-4 border-b border-gray-300">
+                                    <div>
+                                        <div className="review-header flex items-center mb-4">
+                                            <img src={review.photo} alt="User" className="user-photo w-12 h-12 rounded-full mr-4" />
+                                            <div>
+                                                <h4 className="text-lg font-medium">{review.Name}</h4>
+                                                <span className="text-sm text-gray-500">{review.reviewDate}</span>
+                                            </div>
+                                        </div>
+                                        <div className="review-body mb-4">
+                                            <p className="text-gray-800">{review.review}</p>
+                                        </div>
+                                        <div className="review-footer">
+                                            <div className="rating flex">
+                                                {/* Render stars based on the review.rating */}
+                                                {Array.from({ length: review.rating }, (_, starIndex) => (
+                                                    <span
+                                                        key={starIndex}
+                                                        className={`star text-yellow-500 ${starIndex < review.rating ? 'fill-current' : 'text-gray-300'}`}
+                                                    >
+                                                        ★
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="review-body mb-4">
-                                        <p className="text-gray-800">{review.review}</p>
+                                    <div className='md:w-16'>
+                                        <button className='btn btn-sm outline' onClick={handleEditReview}>My Reviews</button>
                                     </div>
-                                    <div className="review-footer">
-                                        <div className="rating flex">
-                                            {/* Render stars based on the review.rating */}
-                                            {Array.from({ length: review.rating }, (_, starIndex) => (
-                                                <span
-                                                    key={starIndex}
-                                                    className={`star text-yellow-500 ${starIndex < review.rating ? 'fill-current' : 'text-gray-300'}`}
-                                                >
-                                                    ★
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
                                 </div>
                             ))
                         ) : (
