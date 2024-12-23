@@ -17,6 +17,8 @@ const AddService = () => {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/add/service`, {
                 ...data,
                 userEmail: user.email,
+                userImg: user.photoURL,
+                userName: user.displayName,
                 addedDate: currentDate,
                 ratings: [],
             });

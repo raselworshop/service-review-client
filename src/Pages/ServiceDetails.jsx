@@ -89,8 +89,8 @@ const handleEditReview =(reviewId)=>{
                         <div className='flex flex-col items-start lg:items-center lg:justify-center'>
                             <img className='p-3 w-60 rounded-lg' 
                             referrerPolicy='no-referrer'
-                            src={service.image || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
-                            <h3>{service.title || "Annonymous"}</h3>
+                            src={service.userImg || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
+                            <h3>{service.userName || "Annonymous"}</h3>
                         </div>
                     </div>
                 </div>
