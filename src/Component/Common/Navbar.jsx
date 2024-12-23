@@ -3,6 +3,7 @@ import { FaCloud } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
+import { motion } from "motion/react"
 
 const Navbar = () => {
     const { user, signOutUser } = UseAuth();
@@ -10,6 +11,7 @@ const Navbar = () => {
     const links = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><a href="#services">Services</a></li>
+        <li><Link to={'/addservice'}>Add Service</Link></li>
         {!user && (<>
             <li><Link to={'/signin'}>Sign In</Link></li>
             <li><Link to={'/signup'}>Sign Up</Link></li>
@@ -54,7 +56,11 @@ const Navbar = () => {
                 <div className='flex items-center justify-center'>
                     <Link to={'/'} className='flex items-center justify-center'>
                         <span><FaCloud className='text-green-700 text-2xl lg:hidden mr-2' /> </span>
-                        <span className="hover mr-2 font-bold text-2xl  md:text-3xl lg:text-4xl">Service Review</span>
+                        <span className="hover mr-2 font-bold text-2xl  md:text-3xl lg:text-4xl">
+                            <motion.span
+                            animate={{color: ['#33f7bc', '#33f74e']}}
+                            transition={{duration: 1.5, repeat:Infinity}}
+                            >Service</motion.span> Review</span>
                         <span>
                             <FaCloud className='text-green-700 text-2xl hidden lg:block  md:text-3xl lg:text-4xl' />
                         </span>
