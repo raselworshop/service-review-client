@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import logo from '/serviceLogo.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../Component/spinner/Spinner';
 const Signup = () => {
     const { createUser, signinWithPop, loading, setLoading, setUser, updateUserProfile } = UseAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state || '/';
     const [passError, setPassError] = useState('')
     const handleGoogleSignIn = async () => {
         try {
@@ -15,6 +18,7 @@ const Signup = () => {
             if (user) {
                 toast.success("User successfully signed in!")
             }
+            navigate(from, {replace:true})
             console.log("Google signin")
 
         } catch (error) {
@@ -51,6 +55,7 @@ const Signup = () => {
             } else {
                 toast.error('User creating unsuccessfull!')
             }
+            navigate(from, {replace:true})
             console.log("User created successfully!", result)
         } catch (error) {
             console.error('Error creating user:', error);

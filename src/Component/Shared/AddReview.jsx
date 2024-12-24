@@ -30,13 +30,13 @@ const AddReview = ({ service, refetchServiceDetails }) => {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, reviewData)
             if (res.status === 201) {
                 console.log('review add successful')
-                refetchServiceDetails();
+                
             }
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/services/rating/${service._id}`, reviewData);
             if (response.status === 201) {
                 console.log('rating added successfully')
-                refetchServiceDetails()
             }
+            refetchServiceDetails()
             toast.dismiss(toastId)
             toast.success('Review added successfully!');
             reset();

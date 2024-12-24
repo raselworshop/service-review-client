@@ -20,9 +20,11 @@ const Navbar = () => {
             )
             }
         </li>
-        <li><Link to={'/addservice'}>Add Service</Link></li>
-        <li><Link to={'/my-reviews'}>My Reviews</Link></li>
-        <li><Link to={'/my-services'}>My Services</Link></li>
+        {user && <>
+            <li><Link to={'/addservice'}>Add Service</Link></li>
+            <li><Link to={'/my-reviews'}>My Reviews</Link></li>
+            <li><Link to={'/my-services'}>My Services</Link></li>
+        </>}
         {!user && (<>
             <li><Link to={'/signin'}>Sign In</Link></li>
             <li><Link to={'/signup'}>Sign Up</Link></li>
@@ -135,11 +137,11 @@ const Navbar = () => {
                 {isMobileSearch && (
                     <div className="absolute top-16 left-0 w-full bg-white p-4 shadow-lg z-10">
                         <label className="input input-bordered w-full flex items-center gap-2">
-                            <input 
-                                type="text" 
-                                className="grow w-full" 
-                                placeholder="Search with title, category, company name" 
-                                value={search} 
+                            <input
+                                type="text"
+                                className="grow w-full"
+                                placeholder="Search with title, category, company name"
+                                value={search}
                                 onChange={(e) => setSearch(e.target.value)} // Handle input change
                             />
                             <button onClick={handleSearch}>

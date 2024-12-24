@@ -43,9 +43,9 @@ const ServiceDetails = () => {
             setRatingState(ratingStats);
         }
     }, [service?.ratings]);
-const handleEditReview =(reviewId)=>{
-    navigate(`/my-reviews`)
-}
+    const handleEditReview = () => {
+        navigate(`/my-reviews`)
+    }
 
     if (loading || !service) return <Spinner />;
     if (error) return <div>Error: {error}</div>;
@@ -73,7 +73,7 @@ const handleEditReview =(reviewId)=>{
                                 target="_blank" rel="noopener noreferrer">{service.website}</a>
                             <p className="text-gray-600 mb-2">
                                 Added on: {format(new Date(service.addedDate), 'yyyy-MM-dd')}</p>
-                            
+
                             <p className="text-gray-600 mb-2">User Email: {service.userEmail}</p>
                         </div>
                         <div className="mt-6">
@@ -87,9 +87,9 @@ const handleEditReview =(reviewId)=>{
                             </ul>
                         </div>
                         <div className='flex flex-col items-start lg:items-center lg:justify-center'>
-                            <img className='p-3 w-60 rounded-lg' 
-                            referrerPolicy='no-referrer'
-                            src={service.userImg || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
+                            <img className='p-3 w-60 rounded-lg'
+                                referrerPolicy='no-referrer'
+                                src={service.userImg || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
                             <h3>{service.userName || "Annonymous"}</h3>
                         </div>
                     </div>
@@ -133,9 +133,11 @@ const handleEditReview =(reviewId)=>{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='md:w-16'>
-                                        <button className='btn btn-sm outline' onClick={handleEditReview}>My Reviews</button>
-                                    </div>
+                                    {
+                                        user.email === review.email && <div className='md:w-16'>
+                                            <button className='btn btn-sm outline' onClick={handleEditReview}>My Reviews</button>
+                                        </div>
+                                    }
                                 </div>
                             ))
                         ) : (

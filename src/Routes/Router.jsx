@@ -11,55 +11,73 @@ import ServiceDetails from "../Pages/ServiceDetails";
 import MyReviews from "../Pages/Userbased/MyReviews";
 import MyServices from "../Pages/Userbased/MyServices";
 import SearchResultPage from "../Pages/SearchResultPage";
+import PrivateRoute from "./PrivateRoute";
+import Partners from "../Pages/Partner/Partners";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout/>,
-      errorElement: <ErrorPage></ErrorPage>,
-      children:[
-        {
-          index:true,
-          element: <Home></Home>,
-        },
-        {
-          path: 'signin',
-          element: <Signin></Signin>,
-        },
-        {
-          path: 'signup',
-          element: <Signup></Signup>
-        },
-        {
-          path: 'profile',
-          element:<Profile></Profile>,
-        },
-        {
-          path: 'addservice',
-          element: <AddService></AddService>,
-        },
-        {
-          path: 'services',
-          element: <AllServices></AllServices>
-        },
-        {
-          path: 'service-details/:serviceId',
-          element: <ServiceDetails></ServiceDetails>
-        },
-        {
-          path: 'my-reviews',
-          element: <MyReviews></MyReviews>
-        },
-        {
-          path: 'my-services',
-          element: <MyServices></MyServices>
-        },
-        {
-          path: 'search',
-          element: <SearchResultPage></SearchResultPage>
-        }
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: 'signin',
+        element: <Signin></Signin>,
+      },
+      {
+        path: 'signup',
+        element: <Signup></Signup>
+      },
+      {
+        path: 'profile',
+        element: <PrivateRoute>
+          <Profile></Profile>,
+        </PrivateRoute>
+      },
+      {
+        path: 'addservice',
+        element: <PrivateRoute>
+          <AddService></AddService>,
+        </PrivateRoute>
+      },
+      {
+        path: 'services',
+        element: <PrivateRoute>
+          <AllServices></AllServices>
+        </PrivateRoute>
+      },
+      {
+        path: 'service-details/:serviceId',
+        element: <PrivateRoute>
+          <ServiceDetails></ServiceDetails>
+        </PrivateRoute>
+      },
+      {
+        path: 'my-reviews',
+        element: <PrivateRoute>
+          <MyReviews></MyReviews>
+        </PrivateRoute>
+      },
+      {
+        path: 'my-services',
+        element: <PrivateRoute>
+          <MyServices></MyServices>
+        </PrivateRoute>
+      },
+      {
+        path: 'search',
+        element: <SearchResultPage></SearchResultPage>
+      },
+      {
+        path: 'partner-program',
+        element: <Partners></Partners>
+      }
+    ]
+  },
+]);
 
-  export default router;
+export default router;

@@ -1,21 +1,23 @@
 import React from 'react';
 import logo from '/serviceLogo.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import toast from 'react-hot-toast';
 import Spinner from '../../Component/spinner/Spinner';
 
 const Signin = () => {
     const { signInUser, signinWithPop, loading, setLoading, } = UseAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state || '/';
     const handleGoogleSignIn = async () => {
         try {
             await signinWithPop()
                 .then(result => {
                     const user = result.user;
                     console.log(user)
-                    if (user) {
-                        toast.success("User successfully signed in!")
-                    }
+                    toast.success("User successfully signed in!")
+                    navigate(from, {replace:true})
                     console.log("Google signin")
                 })
         } catch (error) {
@@ -38,6 +40,7 @@ const Signin = () => {
                     if (user) {
                         toast.success("User successfully signed in!")
                     }
+                    navigate(from, {replace:true})
                 })
         } catch (error) {
             console.log("User unsuccesfull to signed in, please try again!")
