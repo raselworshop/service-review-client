@@ -10,6 +10,7 @@ import AllServices from "../Pages/AllServices";
 import ServiceDetails from "../Pages/ServiceDetails";
 import MyReviews from "../Pages/Userbased/MyReviews";
 import MyServices from "../Pages/Userbased/MyServices";
+import SearchResultPage from "../Pages/SearchResultPage";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         {
           path: 'my-services',
           element: <MyServices></MyServices>
+        },
+        {
+          path: 'search',
+          element: <SearchResultPage></SearchResultPage>
         }
       ]
     },
