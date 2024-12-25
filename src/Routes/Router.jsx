@@ -13,6 +13,7 @@ import MyServices from "../Pages/Userbased/MyServices";
 import SearchResultPage from "../Pages/SearchResultPage";
 import PrivateRoute from "./PrivateRoute";
 import Partners from "../Pages/Partner/Partners";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
         path: 'services',
         element: <PrivateRoute>
           <AllServices></AllServices>
-        </PrivateRoute>
+        </PrivateRoute>,
+        loader: async ()=>{
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicesCount`);
+          return response.data
+        }
       },
       {
         path: 'service-details/:serviceId',
