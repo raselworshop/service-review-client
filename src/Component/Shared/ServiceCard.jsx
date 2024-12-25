@@ -17,6 +17,9 @@ const ServiceCard = ({ service }) => {
             : service.description}
         </p>
         <p className="text-blue-500 font-semibold my-4">
+          Category: {service.category}
+        </p>
+        <p className="text-blue-500 font-semibold my-4">
           Price: ${service.price}
         </p>
         <Link to={`/service-details/${service._id}`} className="mt-auto text-center bg-blue-500 text-white px-4 py-2 rounded-md outline-blue-600 hover:bg-blue-600 transition-colors">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCloud } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
 import { motion } from "motion/react"
@@ -12,22 +12,22 @@ const Navbar = () => {
     const [search, setSearch] = useState('');
     const [isMobileSearch, setIsMobileSearch] = useState(false)
     const links = <>
-        <li><Link to={'/'}>Home</Link></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
         <li>
             {location.pathname === '/' ? (
                 <a href="#services">Services</a>) : (
-                <Link to={'/services'}>Services</Link>
+                <NavLink to={'/services'}>Services</NavLink>
             )
             }
         </li>
         {user && <>
-            <li><Link to={'/addservice'}>Add Service</Link></li>
-            <li><Link to={'/my-reviews'}>My Reviews</Link></li>
-            <li><Link to={'/my-services'}>My Services</Link></li>
+            <li><NavLink to={'/addservice'}>Add Service</NavLink></li>
+            <li><NavLink to={'/my-reviews'}>My Reviews</NavLink></li>
+            <li><NavLink to={'/my-services'}>My Services</NavLink></li>
         </>}
         {!user && (<>
-            <li><Link to={'/signin'}>Sign In</Link></li>
-            <li><Link to={'/signup'}>Sign Up</Link></li>
+            <li><NavLink to={'/signin'}>Sign In</NavLink></li>
+            <li><NavLink to={'/signup'}>Sign Up</NavLink></li>
         </>
         )}
     </>
@@ -72,7 +72,7 @@ const Navbar = () => {
     }
     console.log(search)
     return (
-        <div className="navbar bg-blue-700/20">
+        <div className="navbar bg-blue-700/20 fixed top-0 left-0 w-full z-50 backdrop-blur-md ">
             <div className="navbar-start lg:pl-5">
 
                 <div className='flex items-center justify-center'>

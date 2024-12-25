@@ -44,7 +44,7 @@ const Signin = () => {
                 })
         } catch (error) {
             console.log("User unsuccesfull to signed in, please try again!")
-            toast.error(error.message)
+            toast.error(error.message || "User unsuccesfull to signed in, please try again!")
 
         } finally {
             setLoading(false)

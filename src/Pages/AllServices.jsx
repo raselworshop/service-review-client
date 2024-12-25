@@ -105,7 +105,7 @@ const AllServices = () => {
                     <p className="text-center text-gray-500">No services found for this category.</p>
                 )}
             </div>
-            <div> <p>{currentPage}</p>
+            <div>
                 <button onClick={handlePrevPage} className='btn btn-sm'>Prev</button>
                 {pages.map((page, index) => (
                     <button key={index}
