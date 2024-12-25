@@ -5,6 +5,7 @@ import  { useEffect, useState } from 'react';
 import auth from '../firebase/firebase.config';
 import AuthContext from './AuthContext';
 import Spinner from '../Component/spinner/Spinner';
+import axios from 'axios';
 
 const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
@@ -42,7 +43,19 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
             setUser(currentUser);
-            console.log(currentUser)
+            console.log("state captured",currentUser?.email)
+            if(currentUser?.email){
+                const user = {email: currentUser?.email}
+                axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user,{withCredentials: true})
+                .then(res=>{
+                    console.log("Login token",res.data)
+                })
+            }else{
+                axios.post(`${import.meta.env.VITE_API_URL}/signout`, {}, {withCredentials:true})
+                .then(res=>{
+                    console.log("Log Out Success", res.data)
+                })
+            }
             setLoading(false)
         })
         return ()=>{

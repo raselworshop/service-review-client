@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../spinner/Spinner";
 
 const partners = [
     { id: 1, name: "Partner A", logo: "https://i.ibb.co/PG8P20D/people-shaking-hands.jpg", description: "Leading provider in tech solutions." },
@@ -12,11 +13,24 @@ const partners = [
 ];
 
 const MeetOurPartners = () => {
-    const navigate = useNavigate(); 
-    const handlePartner = () =>{
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true)
+    const [partnersData, setPartnersData] = useState([])
+
+    const handlePartner = () => {
         navigate('/partner-program')
     }
-    const extendedPartners = [...partners, ...partners];
+    useEffect(() => {
+        setTimeout(() => {
+            setPartnersData(partners);
+            setLoading(false)
+        }, 1500);
+    }, [])
+    const extendedPartners = [...partnersData, ...partnersData];
+
+    if (loading) {
+        return <Spinner />
+    }
 
     return (
         <section className="py-10 bg-gray-100 my-8">

@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import UseAuth from '../../Hooks/UseAuth';
 import Spinner from '../../Component/spinner/Spinner';
+import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 Modal.setAppElement('#root');
 
 const MyServices = () => {
@@ -14,13 +15,17 @@ const MyServices = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentService, setCurrentService] = useState(null);
+    const instanceAxios = UseAxiosSecure()
 
     // Fetch services when the component is mounted
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/user/${user.email}`);
-                setServices(response.data);
+                // const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/user/${user.email}`, {withCredentials:true});
+                instanceAxios.get(`/services/user/${user.email}`)
+                .then(response=>{
+                    setServices(response.data);
+                })
             } catch (error) {
                 console.error('Error fetching services:', error);
             } finally {
@@ -91,7 +96,7 @@ const MyServices = () => {
 
     return (
         <div className="container mx-auto p-6">
-            <h2 className="text-2xl font-bold mb-6">My Services</h2>
+            <h2 className="text-2xl font-bold mb-6">My Services: "{services.length}"</h2>
             {/* Search Input */}
             <input type="text" placeholder="Search Services..."
                 className="border p-2 mb-4 w-full rounded-lg 

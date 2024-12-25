@@ -15,7 +15,7 @@ const AllServices = () => {
         const fetchCategories = async () => {
             setLoading(true)
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`)
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`, {withCredentials:true})
                 console.log(response)
                 setCategories(['All', ...response.data])
             } catch (error) {
@@ -29,14 +29,17 @@ const AllServices = () => {
     }, [])
     useEffect(() => {
         const fetchAllServices = async () => {
+            setLoading(true)
             try {
-                setLoading(true)
                 const endpoint = selectedCategory === 'All' ?
                     `${import.meta.env.VITE_API_URL}/services` :
                     `${import.meta.env.VITE_API_URL}/services?category=${selectedCategory}`;
-                const response = await axios.get(endpoint);
+                const response = await axios.get(endpoint, {withCredentials:true});
                 setServices(response.data)
-                console.log(response)
+                console.log("response data", response.data)
+                if (response.data.length === 0) {
+                    console.log('No services found for this category!');
+                }
 
             } catch (error) {
                 setError(error.message);
@@ -69,10 +72,15 @@ const AllServices = () => {
                 </select>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5'>
-                {services.map(service => (
-                    <ServiceCard key={service._id} service={service}></ServiceCard>
-                ))}
+                {services.length > 0 ? (
+                    services.map(service => (
+                        <ServiceCard key={service._id} service={service} />
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500">No services found for this category.</p>
+                )}
             </div>
+
         </div>
     );
 };

@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import UseAuth from '../../Hooks/UseAuth';
 import Spinner from '../../Component/spinner/Spinner';
 import Swal from 'sweetalert2';
+import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 Modal.setAppElement('#root');
 
 const MyReviews = () => {
@@ -14,12 +15,16 @@ const MyReviews = () => {
   const [error, setError] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentReview, setCurrentReview] = useState(null);
+  const instanceAxios = UseAxiosSecure()
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/reviews/user/${user.email}`);
-        setReviews(response.data);
+        // const response = await axios.get(`${import.meta.env.VITE_API_URL}/reviews/user/${user.email}`, {withCredentials:true});
+        instanceAxios.get(`/reviews/user/${user.email}`)
+        .then(response=>{
+          setReviews(response.data);
+        })
       } catch (error) {
         setError('Failed to fetch reviews');
         console.log(error);

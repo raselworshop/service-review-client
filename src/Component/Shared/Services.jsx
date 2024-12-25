@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import ServiceCard from './ServiceCard';
 import { Link } from 'react-router-dom';
+import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 
 const Services = () => {
     const [services, setServices] = useState([]);
-
+ const instanceAxios = UseAxiosSecure();
     useEffect(()=>{
-        fetch('http://localhost:5000/services/limited')
-        .then(res=> res.json())
-        .then(data=>{
-            console.log(data)
-            setServices(data)
-        })
+        // fetch('http://localhost:5000/services/limited')
+        // .then(res=> res.json())
+        // .then(data=>{
+        //     console.log(data)
+        //     setServices(data)
+        // })
+       instanceAxios.get(`/services/limited`) 
+       .then(res=> setServices(res.data))
     },[])
 
     return (

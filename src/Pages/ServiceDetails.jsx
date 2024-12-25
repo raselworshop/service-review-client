@@ -21,7 +21,7 @@ const ServiceDetails = () => {
     const fetchServiceDetails = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`)
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`, {withCredentials:true})
             console.log("response logged", response)
             setService(response.data)
         } catch (error) {
