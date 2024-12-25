@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
 import { motion } from "motion/react"
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const { user, signOutUser } = UseAuth();
@@ -205,6 +206,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div >
+            <ThemeToggle/>
         </div >
     );
 };

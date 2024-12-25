@@ -29,13 +29,13 @@ const PlatformStats = () => {
     };
 
     return (
-        <div className="bg-gray-100 py-10" ref={statsRef}>
+        <div className="py-10" ref={statsRef}>
             <div className="max-w-6xl mx-auto text-center">
                 <h2 className="text-3xl font-bold mb-6">Platform Statistics</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     {/* Total Users */}
-                    <div className="p-6 bg-white shadow-lg rounded-lg">
+                    <div className="p-6 shadow-lg rounded-lg">
                         <h3 className="text-xl font-semibold">Users</h3>
                         {isVisible && (
                             <CountUp
@@ -53,7 +53,7 @@ const PlatformStats = () => {
                     </div>
 
                     {/* Total Reviews */}
-                    <div className="p-6 bg-white shadow-lg rounded-lg">
+                    <div className="p-6 shadow-lg rounded-lg">
                         <h3 className="text-xl font-semibold">Reviews</h3>
                         {isVisible && (
                             <CountUp
@@ -71,7 +71,7 @@ const PlatformStats = () => {
                     </div>
 
                     {/* Total Services */}
-                    <div className="p-6 bg-white shadow-lg rounded-lg">
+                    <div className="p-6 shadow-lg rounded-lg">
                         <h3 className="text-xl font-semibold">Services</h3>
                         {isVisible && (
                             <CountUp

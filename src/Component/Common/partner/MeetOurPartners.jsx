@@ -33,7 +33,7 @@ const MeetOurPartners = () => {
     }
 
     return (
-        <section className="py-10 bg-gray-100 my-8">
+        <section className="py-10 my-8">
             <h2 className="text-3xl font-bold text-center mb-6">Meet Our Partners</h2>
             <div className="overflow-hidden">
                 <motion.div

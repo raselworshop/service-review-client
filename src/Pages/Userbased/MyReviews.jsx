@@ -107,7 +107,7 @@ const MyReviews = () => {
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-bold mb-6">My Reviews</h2>
       {reviews.map(review => (
-        <div key={review._id} className="mb-4 p-4 bg-white rounded-lg shadow-md">
+        <div key={review._id} className="mb-4 p-4 rounded-lg shadow-md">
           <h3 className="text-xl font-bold mb-2">{review.serviceTitle || "Anonymous"}</h3>
           <p className="text-gray-700 mb-2">{review.review}</p>
           <p className="text-yellow-500 mb-2">Rating: {review.rating}</p>

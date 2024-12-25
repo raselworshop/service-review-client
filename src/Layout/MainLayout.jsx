@@ -1,9 +1,15 @@
 import React from 'react';
 import Navbar from '../Component/Common/Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../Component/Common/Footer';
+import useTitle from '../Hooks/useTitle';
 
 const MainLayout = () => {
+    const location = useLocation();
+
+    const currentRoute = location.pathname.split("/")[1]; 
+    const currentTitle = location.state?.title || `${currentRoute.charAt(0).toUpperCase() + currentRoute.slice(1)} || Service Reviews Sytem`; 
+    useTitle(currentTitle)
     return (
         <div className='max-w-full mx-auto'>
             <nav>

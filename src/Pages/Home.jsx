@@ -4,8 +4,10 @@ import Carousel from '../Component/Common/Carousel';
 import PlatformStats from '../Component/Shared/PlatFormState';
 import WhyChoose from '../Component/Common/WhyChoose';
 import MeetOurPartners from '../Component/Common/partner/MeetOurPartners';
+import useTitle from '../Hooks/useTitle';
 
 const Home = () => {
+    useTitle("Home - Services Reviews System")
     return (
         <div className='max-w-7xl mx-auto'>
             <section>

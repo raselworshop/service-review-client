@@ -24,32 +24,38 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
+        title: "Home - Service Reviews System"
       },
       {
         path: 'signin',
         element: <Signin></Signin>,
+        title : "Signin - Services Reviews System"
       },
       {
         path: 'signup',
-        element: <Signup></Signup>
+        element: <Signup></Signup>,
+        title: "Sign Up - Service Reviews",
       },
       {
         path: 'profile',
         element: <PrivateRoute>
           <Profile></Profile>,
-        </PrivateRoute>
+        </PrivateRoute>,
+        title: "Profile - Service Reviews",
       },
       {
         path: 'addservice',
         element: <PrivateRoute>
           <AddService></AddService>,
-        </PrivateRoute>
+        </PrivateRoute>,
+        title: 'Add Service - Services Reviews System',
       },
       {
         path: 'services',
         element: <PrivateRoute>
           <AllServices></AllServices>
         </PrivateRoute>,
+        title: "All Services - Service Reviews", 
         loader: async ()=>{
           const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicesCount`);
           return response.data
@@ -59,27 +65,32 @@ const router = createBrowserRouter([
         path: 'service-details/:serviceId',
         element: <PrivateRoute>
           <ServiceDetails></ServiceDetails>
-        </PrivateRoute>
+        </PrivateRoute>,
+        title: "Service Details - Service Reviews",
       },
       {
         path: 'my-reviews',
         element: <PrivateRoute>
           <MyReviews></MyReviews>
-        </PrivateRoute>
+        </PrivateRoute>,
+        title: "My Reviews - Service Reviews",
       },
       {
         path: 'my-services',
         element: <PrivateRoute>
           <MyServices></MyServices>
-        </PrivateRoute>
+        </PrivateRoute>,
+        title: "My Services - Service Reviews",
       },
       {
         path: 'search',
-        element: <SearchResultPage></SearchResultPage>
+        element: <SearchResultPage></SearchResultPage>,
+        title: "Search Results - Service Reviews",
       },
       {
         path: 'partner-program',
-        element: <Partners></Partners>
+        element: <Partners></Partners>,
+        title: "Partner Program - Service Reviews",
       }
     ]
   },

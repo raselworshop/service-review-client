@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '/serviceLogo.jpg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UseAuth from '../../Hooks/UseAuth';
 import toast from 'react-hot-toast';
 import Spinner from '../../Component/spinner/Spinner';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signin = () => {
     const { signInUser, signinWithPop, loading, setLoading, } = UseAuth();
     const location = useLocation();
+    const [eyeOpen, setEyeOpen] = useState(false)
     const navigate = useNavigate();
     const from = location.state || '/';
     const handleGoogleSignIn = async () => {
@@ -17,7 +19,7 @@ const Signin = () => {
                     const user = result.user;
                     console.log(user)
                     toast.success("User successfully signed in!")
-                    navigate(from, {replace:true})
+                    navigate(from, { replace: true })
                     console.log("Google signin")
                 })
         } catch (error) {
@@ -40,7 +42,7 @@ const Signin = () => {
                     if (user) {
                         toast.success("User successfully signed in!")
                     }
-                    navigate(from, {replace:true})
+                    navigate(from, { replace: true })
                 })
         } catch (error) {
             console.log("User unsuccesfull to signed in, please try again!")
@@ -50,12 +52,15 @@ const Signin = () => {
             setLoading(false)
         }
     }
-    if(loading){
-        return <Spinner/>
+    const showPass=()=>{
+        setEyeOpen(!eyeOpen)
+    }
+    if (loading) {
+        return <Spinner />
     }
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
-            <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
+            <div className='flex w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow-lg  lg:max-w-4xl '>
                 <div
                     className='hidden bg-cover bg-center lg:block lg:w-1/2'
                     style={{
@@ -123,28 +128,38 @@ const Signin = () => {
                                 id='LoggingEmailAddress'
                                 autoComplete='email'
                                 name='email'
-                                className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
+                                className='block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                                 type='email'
                             />
                         </div>
 
                         <div className='mt-4'>
-                            <div className='flex justify-between'>
-                                <label
-                                    className='block mb-2 text-sm font-medium text-gray-600 '
-                                    htmlFor='loggingPassword'
-                                >
-                                    Password
+                            <div className='relative'>
+                                <div className='flex justify-between'>
+                                    <label
+                                        className='block mb-2 text-sm font-medium text-gray-600 '
+                                        htmlFor='loggingPassword'
+                                    >
+                                        Password
+                                    </label>
+                                </div>
+
+                                <input
+                                    id='loggingPassword'
+                                    autoComplete='current-password'
+                                    name='password'
+                                    className='block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
+                                    type={eyeOpen ? "text" : "password"}
+                                />
+                                <button onClick={showPass} type='button'
+                                    className='absolute right-5 top-10'
+                                    aria-label={eyeOpen ? "Hide password" : "Show password"}>
+                                    {eyeOpen ? <FaEye /> : <FaEyeSlash />}
+                                </button>
+                                <label className="label">
+                                    <span onClick={() => alert('Coming very soon')} className="label-text-alt link link-hover">Forgot password?</span>
                                 </label>
                             </div>
-
-                            <input
-                                id='loggingPassword'
-                                autoComplete='current-password'
-                                name='password'
-                                className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                                type='password'
-                            />
                         </div>
                         <div className='mt-6'>
                             <button

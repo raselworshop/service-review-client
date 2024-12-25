@@ -54,7 +54,7 @@ const Partners = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 {/* Total Users */}
-                <div className="p-6 bg-white shadow-lg rounded-lg" ref={statsRef}>
+                <div className="p-6 shadow-lg rounded-lg" ref={statsRef}>
                     <CountUp
                         start={0}
                         end={stats.domains}
@@ -71,7 +71,7 @@ const Partners = () => {
                 </div>
 
                 {/* Total Reviews */}
-                <div className="p-6 bg-white shadow-lg rounded-lg">
+                <div className="p-6 shadow-lg rounded-lg">
                     <CountUp
                         start={0}
                         end={stats.reviews}
@@ -88,7 +88,7 @@ const Partners = () => {
                 </div>
 
                 {/* Total Services */}
-                <div className="p-6 bg-white shadow-lg rounded-lg">
+                <div className="p-6 shadow-lg rounded-lg">
                     <CountUp
                         start={0}
                         end={stats.services}
@@ -106,7 +106,7 @@ const Partners = () => {
                         Enthusiastically reinvent accurate materials whereas enterprise alignments. Collaboratively disintermediate multifunctional quality.</p>
                 </div>
             </div>
-            <section className="flex flex-col lg:flex-row items-center justify-between py-10 bg-gray-100">
+            <section className="flex flex-col lg:flex-row items-center justify-between py-10">
                 <div className="max-w-lg px-4">
                     <h2 className="text-3xl font-bold mb-4">A purpose-driven business</h2>
                     <p className="mb-6"> "Our vision is to become the universal symbol of trust, empowering consumers to make confident, informed buying decisions while allowing businesses to credibly signal the quality of their services and to gain actionable insights to improve them."
