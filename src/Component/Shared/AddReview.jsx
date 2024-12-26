@@ -27,12 +27,12 @@ const AddReview = ({ service, refetchServiceDetails }) => {
                 serviceId: service._id,
             }
             // console.log(service.title) // is ok
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, reviewData)
+            const res = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/reviews`, reviewData)
             if (res.status === 201) {
                 // console.log('review add successful')
                 
             }
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/services/rating/${service._id}`, reviewData);
+            const response = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/services/rating/${service._id}`, reviewData);
             if (response.status === 201) {
                 // console.log('rating added successfully')
             }
