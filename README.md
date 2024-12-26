@@ -44,18 +44,18 @@ This is a full-stack web application designed for users to review various servic
  
 The following NPM packages are used in the backend of this project:
 
-cookie-parser: ^1.4.7
-Middleware for parsing cookies attached to the client request object.
-cors: ^2.8.5
-Middleware to enable Cross-Origin Resource Sharing.
-dotenv: ^16.4.7
-Loads environment variables from a .env file into process.env.
-express: ^4.21.2
-A minimal and flexible Node.js web application framework.
-jsonwebtoken: ^9.0.2
-For creating and verifying JSON Web Tokens (JWT).
-mongodb: ^6.12.0
-Official MongoDB driver for Node.js.
+- cookie-parser: ^1.4.7
+- Middleware for parsing cookies attached to the client request object.
+- cors: ^2.8.5
+- Middleware to enable Cross-Origin Resource Sharing.
+- dotenv: ^16.4.7
+- Loads environment variables from a .env file into process.env.
+- express: ^4.21.2
+- A minimal and flexible Node.js web application framework.
+- jsonwebtoken: ^9.0.2
+- For creating and verifying JSON Web Tokens (JWT).
+- mongodb: ^6.12.0
+- Official MongoDB driver for Node.js.
 
 ### Frontend (Client-side)
 
@@ -74,7 +74,7 @@ Official MongoDB driver for Node.js.
 
 4. Start the frontend:
    ```bash
-   npm start
+   npm run dev
    ```
 
    The frontend will run on `http://localhost:5173`.
@@ -92,7 +92,7 @@ Official MongoDB driver for Node.js.
 - **Backend**: Node.js, Express, Mongodb
 - **Database**: Firebase Firestore
 - **Authentication**: Firebase Authentication
-- **Hosting**: Vercel (Backend), Netlify (Frontend)
+- **Hosting**: Vercel (Backend), Netlify & Firebase (Frontend)
 
 ## Contributing
 
