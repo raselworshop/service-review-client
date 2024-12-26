@@ -6,6 +6,7 @@ import UseAuth from '../Hooks/UseAuth';
 import Spinner from '../Component/spinner/Spinner';
 import AddReview from '../Component/Shared/AddReview';
 import { Toaster } from 'react-hot-toast';
+import UseAxiosSecure from '../Hooks/UseAxiosSecure';
 // import { motion, useScroll } from "motion/react"
 
 const ServiceDetails = () => {
@@ -17,15 +18,17 @@ const ServiceDetails = () => {
     const [error, setError] = useState('');
     const [ratingStats, setRatingState] = useState({});
     const navigate = useNavigate()
+    const axiosSecure = UseAxiosSecure()
 
     const fetchServiceDetails = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`, {withCredentials:true})
-            console.log("response logged", response)
+            // const response = await axios.get(`${import.meta.env.VITE_API_URL}/services/details/${serviceId}`, {withCredentials:true})
+            // console.log("response logged", response)
+            const response = await axiosSecure.get(`/services/details/${serviceId}`)
             setService(response.data)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             setError(error.message)
         } finally {
             setLoading(false)

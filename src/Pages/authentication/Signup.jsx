@@ -16,20 +16,20 @@ const Signup = () => {
         try {
             const result = await signinWithPop()
             const user = result.user;
-            console.log(user)
+            // console.log(user)
             if (user) {
                 toast.success("User successfully signed in!")
             }
             navigate(from, { replace: true })
-            console.log("Google signin")
+            // console.log("Google signin")
 
         } catch (error) {
-            console.log("User unsuccesfull to signed in, please try again!")
+            // console.log("User unsuccesfull to signed in, please try again!")
             toast.error(error.message)
         } finally {
             setLoading(false)
         }
-        console.log("Google signin comming soon")
+        // console.log("Google signin comming soon")
     }
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -41,7 +41,7 @@ const Signup = () => {
         const userData = {
             name, photo, email, password,
         }
-        console.log('Comming soon email pass', userData);
+        // console.log('Comming soon email pass', userData);
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if (!passwordRegex.test(password)) {
             return setPassError('Password must be at least 6charecter longer, one uppercase and one lowercase')
@@ -58,9 +58,9 @@ const Signup = () => {
                 toast.error('User creating unsuccessfull!')
             }
             navigate(from, { replace: true })
-            console.log("User created successfully!", result)
+            // console.log("User created successfully!", result)
         } catch (error) {
-            console.error('Error creating user:', error);
+            // console.error('Error creating user:', error);
             toast.error('User creating unsuccessfull!', error)
         } finally {
             setLoading(false)

@@ -27,7 +27,7 @@ const MyServices = () => {
                     setServices(response.data);
                 })
             } catch (error) {
-                console.error('Error fetching services:', error);
+                // console.error('Error fetching services:', error);
             } finally {
                 setLoading(false);
             }
@@ -47,11 +47,12 @@ const MyServices = () => {
     };
 
     const handleUpdate = async (serviceId, updatedData) => {
-        console.log('Service ID:', serviceId);
-        console.log('Sending data:', updatedData); //ekhane data paoa jay na
+        // console.log('Service ID:', serviceId);
+        // console.log('Sending data:', updatedData); //ekhane data paoa jay na
 
         try {
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/services/update/${serviceId}`, updatedData);
+            // const response = await axios.put(`${import.meta.env.VITE_API_URL}/services/update/${serviceId}`, updatedData);
+            const response = await instanceAxios.put(`/services/update/${serviceId}`, updatedData)
             if (response.status === 200) {
                 toast.success('Service updated successfully');
                 const updatedServices = services.map(service =>
@@ -62,7 +63,7 @@ const MyServices = () => {
             }
         } catch (error) {
             toast.error('Failed to update service');
-            console.log(error);
+            // console.log(error);
         }
     };
  
@@ -76,14 +77,15 @@ const MyServices = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await axios.delete(`${import.meta.env.VITE_API_URL}/services/delete/${serviceId}`);
+                    // const response = await axios.delete(`${import.meta.env.VITE_API_URL}/services/delete/${serviceId}`);
+                    const response = await instanceAxios.delete(`/services/delete/${serviceId}`)
                     if (response.status === 200) {
                         toast.success('Service deleted successfully');
                         setServices(services.filter(service => service._id !== serviceId));
                     }
                 } catch (error) {
                     toast.error('Failed to delete service');
-                    console.log(error);
+                    // console.log(error);
                 }
             } else {
                 Swal.fire('Service not deleted', '', 'info');
@@ -148,7 +150,7 @@ const MyServices = () => {
                             category: e.target.category.value,
                             price: parseFloat(e.target.price.value),
                         };
-                        console.log('Sending data:', updatedData); //ekhane data thik moto jay
+                        // console.log('Sending data:', updatedData); //ekhane data thik moto jay
 
                         handleUpdate(currentService._id, updatedData);
                     }} >

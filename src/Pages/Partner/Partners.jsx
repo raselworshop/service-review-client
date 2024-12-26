@@ -7,7 +7,7 @@ const Partners = () => {
     const statsRef = useRef(null)
     useEffect(() => {
         if (!statsRef.current) {
-            console.error("CountUp target not found")
+            // console.error("CountUp target not found")
         }
     }, [])
     const stats = {

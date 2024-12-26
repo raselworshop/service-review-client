@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         </PrivateRoute>,
         title: "All Services - Service Reviews", 
         loader: async ()=>{
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicesCount`);
+          const response = await axios.get(`${import.meta.env.VITE_PROD_API_URL}/servicesCount`);
           return response.data
         }
       },

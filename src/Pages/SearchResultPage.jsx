@@ -3,12 +3,14 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ServiceCard from '../Component/Shared/ServiceCard';
 import Spinner from '../Component/spinner/Spinner';
+import UseAxiosSecure from '../Hooks/UseAxiosSecure';
 
 const SearchResultPage = () => {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const location = useLocation();
+    const axiosSecure = UseAxiosSecure()
 
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get('query'); 
@@ -16,7 +18,8 @@ const SearchResultPage = () => {
     useEffect(() => {
         if (query) {
             setLoading(true);
-            axios.get(`${import.meta.env.VITE_API_URL}/services/search?query=${query}`)
+            // axios.get(`${import.meta.env.VITE_API_URL}/services/search?query=${query}`)
+            axiosSecure(`/services/search?query=${query}`)
                 .then(response => {
                     setServices(response.data);
                     setLoading(false);

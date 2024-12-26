@@ -4,6 +4,7 @@ import Spinner from '../Component/spinner/Spinner';
 import ServiceCard from '../Component/Shared/ServiceCard';
 import axios from 'axios';
 import { useLoaderData } from 'react-router-dom';
+import UseAxiosSecure from '../Hooks/UseAxiosSecure';
 
 const AllServices = () => {
     const { user } = UseAuth();
@@ -16,6 +17,7 @@ const AllServices = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const [itemPerpage, setItemperPage] = useState(9)
     const numberOfPages = Math.ceil(count / itemPerpage)
+    const axiosSecure = UseAxiosSecure()
 
     const pages = [...Array(numberOfPages).keys()]
 
@@ -23,30 +25,32 @@ const AllServices = () => {
         const fetchCategories = async () => {
             setLoading(true)
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`, { withCredentials: true })
-                console.log(response)
+                // const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`, { withCredentials: true })
+                const response = await axiosSecure.get(`/categories`)
+                // console.log(response)
                 setCategories(['All', ...response.data])
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 setError(error.message);
             } finally {
                 setLoading(false)
             }
         }
         fetchCategories();
-    }, [])
+    }, [axiosSecure])
     useEffect(() => {
         const fetchAllServices = async () => {
             setLoading(true)
             try {
                 const endpoint = selectedCategory === 'All' ?
-                    `${import.meta.env.VITE_API_URL}/services?page=${currentPage}&size=${itemPerpage}` :
-                    `${import.meta.env.VITE_API_URL}/services?category=${selectedCategory}&page=${currentPage}&size=${itemPerpage}`;
-                const response = await axios.get(endpoint, { withCredentials: true });
+                    `/services?page=${currentPage}&size=${itemPerpage}` :
+                    `/services?category=${selectedCategory}&page=${currentPage}&size=${itemPerpage}`;
+                // const response = await axios.get(endpoint, { withCredentials: true });
+                const response = await axiosSecure.get(endpoint)
                 setServices(response.data)
-                console.log("response data", response.data)
+                // console.log("response data", response.data)
                 if (response.data.length === 0) {
-                    console.log('No services found for this category!');
+                    // console.log('No services found for this category!');
                 }
 
             } catch (error) {
@@ -56,10 +60,10 @@ const AllServices = () => {
             }
         };
         fetchAllServices();
-    }, [selectedCategory, currentPage, itemPerpage])
+    }, [selectedCategory, currentPage, itemPerpage, axiosSecure])
 
     const handleItemPerPage = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         const numb = parseInt(e.target.value);
         setItemperPage(numb);
         setCurrentPage(0)

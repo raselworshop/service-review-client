@@ -71,7 +71,7 @@ const Navbar = () => {
     const toggle = () => {
         setIsMobileSearch(!isMobileSearch)
     }
-    console.log(search)
+    // console.log(search)
     return (
         <div className="navbar bg-blue-700/20 fixed top-0 left-0 w-full z-50 backdrop-blur-md ">
             <div className="navbar-start lg:pl-5">

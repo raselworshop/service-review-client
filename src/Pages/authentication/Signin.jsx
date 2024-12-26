@@ -17,13 +17,13 @@ const Signin = () => {
             await signinWithPop()
                 .then(result => {
                     const user = result.user;
-                    console.log(user)
+                    // console.log(user)
                     toast.success("User successfully signed in!")
                     navigate(from, { replace: true })
-                    console.log("Google signin")
+                    // console.log("Google signin")
                 })
         } catch (error) {
-            console.log("User unsuccesfull to signed in, please try again!")
+            // console.log("User unsuccesfull to signed in, please try again!")
             toast.error(error.message)
         } finally {
             setLoading(false)
@@ -34,7 +34,7 @@ const Signin = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log('Comming soon email pass', email, password)
+        // console.log('Comming soon email pass', email, password)
         try {
             await signInUser(email, password)
                 .then(result => {
@@ -45,7 +45,7 @@ const Signin = () => {
                     navigate(from, { replace: true })
                 })
         } catch (error) {
-            console.log("User unsuccesfull to signed in, please try again!")
+            // console.log("User unsuccesfull to signed in, please try again!")
             toast.error(error.message || "User unsuccesfull to signed in, please try again!")
 
         } finally {

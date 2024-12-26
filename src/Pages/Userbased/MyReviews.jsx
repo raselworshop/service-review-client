@@ -27,7 +27,7 @@ const MyReviews = () => {
         })
       } catch (error) {
         setError('Failed to fetch reviews');
-        console.log(error);
+        // console.log(error);
       } finally {
         setLoading(false);
       }
@@ -56,7 +56,8 @@ const MyReviews = () => {
       }).then(async(result) => {
         if (result.isConfirmed) {
           try {
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/reviews/update/${currentReview._id}`, data);
+            // const response = await axios.put(`${import.meta.env.VITE_API_URL}/reviews/update/${currentReview._id}`, data);
+            const response = await instanceAxios.put(`/reviews/update/${currentReview._id}`, data)
             if (response.status === 200) {
               toast.success('Review updated successfully');
               const updatedReviews = reviews.map((review) =>
@@ -67,7 +68,7 @@ const MyReviews = () => {
             }
           } catch (error) {
             toast.error('Failed to update review');
-            console.log(error);
+            // console.log(error);
           }
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
@@ -85,14 +86,15 @@ const MyReviews = () => {
       }).then(async(result) => {
         if (result.isConfirmed) {
             try {
-                const response = await axios.delete(`${import.meta.env.VITE_API_URL}/reviews/delete/${reviewId}`);
+                // const response = await axios.delete(`${import.meta.env.VITE_API_URL}/reviews/delete/${reviewId}`);
+                const response = await instanceAxios.delete(`/reviews/delete/${reviewId}`)
                 if (response.status === 200) {
                   toast.success('Review deleted successfully');
                   setReviews(reviews.filter(review => review._id !== reviewId));
                 }
               } catch (error) {
                 toast.error('Failed to delete review');
-                console.log(error);
+                // console.log(error);
               }
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");

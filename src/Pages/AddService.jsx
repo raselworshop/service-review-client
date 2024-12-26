@@ -7,14 +7,17 @@ import { format } from 'date-fns';
 import Brand from '/public/lottiee/brand.json'
 import Lottie from 'lottie-react';
 import { motion } from "motion/react"
+import UseAxiosSecure from '../Hooks/UseAxiosSecure';
 
 const AddService = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = UseAuth();
+    const axiosSecure = UseAxiosSecure()
     const currentDate = format(new Date(), 'yyyy-MM-dd')
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/add/service`, {
+            // const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/add/service`, {
+            const response = await axiosSecure.post(`/user/add/service`, {
                 ...data,
                 userEmail: user.email,
                 userImg: user.photoURL,
@@ -24,11 +27,11 @@ const AddService = () => {
             });
             toast.success('Service added successfully!')
             if (response.status === 201) {
-                console.log(response)
+                // console.log(response)
                 toast.success('Service added successfully!')
             }
         } catch (error) {
-            console.log('Failed to add service, please try again', error)
+            // console.log('Failed to add service, please try again', error)
             toast.error(`${error ? error.message : "Failed to add service, please try again"}`)
         }
     }
