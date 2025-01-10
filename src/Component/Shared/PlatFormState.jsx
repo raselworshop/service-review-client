@@ -29,10 +29,10 @@ const PlatformStats = () => {
     };
 
     return (
-        <div className="py-10" ref={statsRef}>
-            <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-3xl font-bold mb-6">Platform Statistics</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto" ref={statsRef}>
+            <div className=" -mx-6 text-center">
+                <h2 className="text-3xl font-bold my-6">Platform Statistics</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
 
                     {/* Total Users */}
                     <div className="p-6 shadow-lg rounded-lg">
@@ -46,10 +46,10 @@ const PlatformStats = () => {
                                 suffix='+'
                                 // scrollSpyOnce
                                 separator=","
-                                className="text-4xl font-bold text-blue-500"
+                                className="text-4xl font-bold text-custom-accent"
                             />
                         )}
-                        <p className="text-gray-500 mt-2">Registered Users</p>
+                        <p className="mt-2">Registered Users</p>
                     </div>
 
                     {/* Total Reviews */}
@@ -64,15 +64,15 @@ const PlatformStats = () => {
                                 enableScrollSpy
                                 suffix='+'
                                 // scrollSpyOnce
-                                className="text-4xl font-bold text-green-500"
+                                className="text-4xl font-bold text-custom-accent"
                             />
                         )}
-                        <p className="text-gray-500 mt-2">Reviews Posted</p>
+                        <p className="mt-2">Reviews Posted</p>
                     </div>
 
                     {/* Total Services */}
                     <div className="p-6 shadow-lg rounded-lg">
-                        <h3 className="text-xl font-semibold">Services</h3>
+                        <h3 className="text-xl  font-semibold">Services</h3>
                         {isVisible && (
                             <CountUp
                                 start={0}
@@ -82,10 +82,10 @@ const PlatformStats = () => {
                                 suffix='+'
                                 enableScrollSpy
                                 // scrollSpyOnce
-                                className="text-4xl font-bold text-purple-500"
+                                className="text-4xl font-bold text-custom-accent"
                             />
                         )}
-                        <p className="text-gray-500 mt-2">Services Available</p>
+                        <p className=" mt-2">Services Available</p>
                     </div>
                 </div>
             </div>

@@ -66,7 +66,7 @@ const Partners = () => {
                         className="text-4xl font-bold text-blue-500"
                     />
                     <h3 className="text-2xl font-semibold my-3">Domains</h3>
-                    <p className="text-gray-500">Seamlessly monetize enterprise niches via 24/7 opportunities. Objectively exploit go forward opportunities via web-enabled value. Proactively orchestrate out-of-the-box synergy after bleeding-edge communities. Dynamically administrate sticky expertise rather than impactful partnerships. Interactively embrace out-of-the-box niches vis-a-vis open-source paradigms.
+                    <p>Seamlessly monetize enterprise niches via 24/7 opportunities. Objectively exploit go forward opportunities via web-enabled value. Proactively orchestrate out-of-the-box synergy after bleeding-edge communities. Dynamically administrate sticky expertise rather than impactful partnerships. Interactively embrace out-of-the-box niches vis-a-vis open-source paradigms.
                         Phosfluorescently productivate visionary manufactured products and resource-leveling "outside the box" thinking. Progressively target 2.0 systems through long-term.</p>
                 </div>
 
@@ -83,7 +83,7 @@ const Partners = () => {
                         className="text-4xl font-bold text-green-500"
                     />
                     <h3 className="text-2xl font-semibold my-3">Reviews</h3>
-                    <p className="text-gray-500">Reviews Posted</p>
+                    <p>Reviews Posted</p>
                     <p>Conveniently cultivate transparent scenarios through B2C niche markets. Competently harness synergistic outsourcing after world-class infomediaries. Progressively provide access to parallel e-markets before exceptional strategic theme areas. Objectively orchestrate quality innovation whereas flexible growth strategies. Enthusiastically engineer diverse deliverables for prospective best practices.Completely facilitate leveraged opportunities vis-a-vis web-enabled functionalities. Phosfluorescently syndicate adaptive results through.</p>
                 </div>
 
@@ -100,7 +100,7 @@ const Partners = () => {
                         className="text-4xl font-bold text-purple-500"
                     />
                     <h3 className="text-2xl font-semibold mt-3">Services</h3>
-                    <p className="text-gray-500">Services Available</p>
+                    <p>Services Available</p>
                     <p>Credibly unleash B2B bandwidth without cross-unit infrastructures. Globally administrate bricks-and-clicks best practices through magnetic best practices. Objectively create bleeding-edge action items without integrated potentialities. Collaboratively incentivize user-centric supply chains before B2C users. Professionally harness exceptional core competencies rather than high standards in markets.
 
                         Enthusiastically reinvent accurate materials whereas enterprise alignments. Collaboratively disintermediate multifunctional quality.</p>

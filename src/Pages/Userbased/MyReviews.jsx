@@ -111,18 +111,18 @@ const MyReviews = () => {
       {reviews.map(review => (
         <div key={review._id} className="mb-4 p-4 rounded-lg shadow-md">
           <h3 className="text-xl font-bold mb-2">{review.serviceTitle || "Anonymous"}</h3>
-          <p className="text-gray-700 mb-2">{review.review}</p>
+          <p className="mb-2">{review.review}</p>
           <p className="text-yellow-500 mb-2">Rating: {review.rating}</p>
           <button
             onClick={() => openModal(review)}
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+            className="bg-blue-500 px-4 py-2 rounded mr-2"
           >
             Update
           </button>
           <button
           
             onClick={() => handleDelete(review._id)}
-            className="bg-red-500 text-white px-4 py-2 rounded"
+            className="bg-red-500 px-4 py-2 rounded"
           >
             Delete
           </button>
@@ -139,37 +139,37 @@ const MyReviews = () => {
           }}>
             <h2 className="text-2xl font-bold mb-4">Update Review</h2>
             <div className="mb-4">
-              <label htmlFor="serviceTitle" className="block text-gray-700 font-bold mb-2">Service Title:</label>
+              <label htmlFor="serviceTitle" className="block font-bold mb-2">Service Title:</label>
               <input
                 type="text"
                 id="serviceTitle"
                 value={currentReview.serviceTitle}
                 readOnly
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="review" className="block text-gray-700 font-bold mb-2">Review:</label>
+              <label htmlFor="review" className="block font-bold mb-2">Review:</label>
               <textarea
                 id="review"
                 defaultValue={currentReview.review}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="rating" className="block text-gray-700 font-bold mb-2">Rating:</label>
+              <label htmlFor="rating" className="block  font-bold mb-2">Rating:</label>
               <input
                 type="number"
                 id="rating"
                 defaultValue={currentReview.rating}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 min="1"
                 max="5"
                 required
               />
             </div>
-            <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 transition-colors">
+            <button type="submit" className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 transition-colors">
               Save Changes
             </button>
           </form>

@@ -36,7 +36,7 @@ const AddService = () => {
         }
     }
     return (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto py-5">
             <motion.h2
                 animate={{ x: 50, color:['#33f786'] }}
                 transition={{ duration: 3, delay: 1.5, ease: "linear", repeat:Infinity }}
@@ -47,55 +47,55 @@ const AddService = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label htmlFor="image"
-                                className="block text-gray-700 font-bold mb-2">
+                                className="block font-bold mb-2">
                                 Service Image URL:
                             </label>
                             <input type="text" id="image"
                                 {...register('image', { required: true })}
                                 className="shadow appearance-none border rounded w-full py-2 px-3
-                     text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                     leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.image && <span
                                 className="text-red-500">This field is required
                             </span>}
                         </div>
                         <div className="mb-4">
                             <label htmlFor="title"
-                                className="block text-gray-700 font-bold mb-2">
+                                className="block font-bold mb-2">
                                 Service Title:
                             </label>
                             <input type="text" id="title"
                                 {...register('title', { required: true })}
                                 className="shadow appearance-none border rounded w-full 
-                            py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                            py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.title && <span
                                 className="text-red-500">This field is required</span>
                             } </div> <div className="mb-4">
                             <label htmlFor="companyName"
-                                className="block text-gray-700 font-bold mb-2">Company Name:</label>
+                                className="block font-bold mb-2">Company Name:</label>
                             <input type="text" id="companyName"
                                 {...register('companyName', { required: true })}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 
-                             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                             leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.companyName && <span
                                 className="text-red-500">This field is required</span>
                             } </div>
                         <div className="mb-4">
                             <label htmlFor="website"
-                                className="block text-gray-700 font-bold mb-2">Website:</label>
+                                className="block font-bold mb-2">Website:</label>
                             <input type="text" id="website"
                                 {...register('website', { required: true })}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 
-                                text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.website && <span
                                 className="text-red-500">This field is required</span>
                             }
                         </div>
                         <div className="mb-4">
                             <label htmlFor="description"
-                                className="block text-gray-700 font-bold mb-2">Description:</label>
+                                className="block font-bold mb-2">Description:</label>
                             <textarea id="description"
                                 {...register('description', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                                className="shadow appearance-none border rounded w-full py-2 px-3
                                      leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.description && <span
                                 className="text-red-500">This field is required</span>
@@ -103,10 +103,10 @@ const AddService = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="category"
-                                className="block text-gray-700 font-bold mb-2">Category:</label>
+                                className="block font-bold mb-2">Category:</label>
                             <input type="text" id="category"
                                 {...register('category', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 
                                         leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.category && <span
                                 className="text-red-500">This field is required</span>
@@ -114,7 +114,7 @@ const AddService = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="price"
-                                className="block text-gray-700 font-bold mb-2">Price:</label>
+                                className="block font-bold mb-2">Price:</label>
                             <input type="number" id="price"
                                 {...register('price', { required: true })}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
@@ -125,23 +125,23 @@ const AddService = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="addedDate"
-                                className="block text-gray-700 font-bold mb-2">Added Date:</label>
+                                className="block font-bold mb-2">Added Date:</label>
                             <input type="text"
                                 id="addedDate"
                                 value={format(new Date(), 'yyyy-MM-dd')}
                                 readOnly
                                 className="shadow appearance-none border rounded w-full py-2 px-3
-                     text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                     leading-tight focus:outline-none focus:shadow-outline"/>
                         </div>
                         <button type="submit"
-                            className="bg-blue-500 text-white font-bold py-2 px-4 rounded
+                            className="bg-blue-500 font-bold py-2 px-4 rounded
                                               focus:outline-none focus:shadow-outline
                                                hover:bg-blue-700 transition-colors">
                             Add Service
                         </button>
                     </form>
                 </div>
-                <div className='w-full lg:w-2/4'>
+                <div className='w-full md:w-2/4'>
                     <Lottie animationData={Brand} />
                 </div>
             </div>

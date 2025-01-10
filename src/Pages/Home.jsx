@@ -9,7 +9,7 @@ import useTitle from '../Hooks/useTitle';
 const Home = () => {
     useTitle("Home - Services Reviews System")
     return (
-        <div className='max-w-7xl mx-auto'>
+        <div className='w-full mx-auto'>
             <section>
                 <Carousel/>
             </section>

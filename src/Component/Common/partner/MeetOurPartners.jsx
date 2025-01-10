@@ -33,8 +33,8 @@ const MeetOurPartners = () => {
     }
 
     return (
-        <section className="py-10 my-8">
-            <h2 className="text-3xl font-bold text-center mb-6">Meet Our Partners</h2>
+        <section>
+            <h2 className="text-3xl font-bold my-6 text-center">Meet Our Partners</h2>
             <div className="overflow-hidden">
                 <motion.div
                     className="flex gap-6"
@@ -46,7 +46,7 @@ const MeetOurPartners = () => {
                         <motion.div
                             key={`${partner.id}-${index}`}
                             whileHover={{ scale: 1.1 }}
-                            className="flex flex-col items-center bg-white shadow-lg p-4 rounded-lg"
+                            className="flex flex-col items-center shadow-lg p-4 rounded-lg"
                             style={{ width: "120px" }}
                         >
                             <img src={partner.logo} alt={partner.name} className="w-20 h-20 object-contain mb-2" />
@@ -56,7 +56,7 @@ const MeetOurPartners = () => {
                 </motion.div>
             </div>
             <div className="text-center mt-6">
-                <button className="btn btn-secondary btn-outline" onClick={handlePartner}>
+                <button className="btn btn-accent hover:btn-primary" onClick={handlePartner}>
                     Explore All Partners
                 </button>
             </div>

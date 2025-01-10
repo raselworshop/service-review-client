@@ -69,15 +69,15 @@ const ServiceDetails = () => {
                     <div className='flex items-center justify-between'>
                         <div>
                             <p className="text-blue-500 font-semibold mb-4">Price: ${service.price}</p>
-                            <p className="text-gray-600 mb-2">Category: {service.category}</p>
-                            <p className="text-gray-600 mb-2">Company: {service.companyName}</p>
+                            <p className=" mb-2">Category: {service.category}</p>
+                            <p className=" mb-2">Company: {service.companyName}</p>
                             <a href={service.website}
                                 className="text-blue-500 mb-2 underline"
                                 target="_blank" rel="noopener noreferrer">{service.website}</a>
-                            <p className="text-gray-600 mb-2">
+                            <p className=" mb-2">
                                 Added on: {format(new Date(service.addedDate), 'yyyy-MM-dd')}</p>
 
-                            <p className="text-gray-600 mb-2">User Email: {service.userEmail}</p>
+                            <p className=" mb-2">User Email: {service.userEmail}</p>
                         </div>
                         <div className="mt-6">
                             <h3 className="text-lg font-bold mb-4">Rating Statistics:</h3>
@@ -103,24 +103,24 @@ const ServiceDetails = () => {
                 </div>
             </div>
             <div className='my-8'>
-                {service?.ratings && <div className="service-details bg-white p-6 rounded-lg shadow-lg">
+                {service?.ratings && <div className="service-details p-6 rounded-lg shadow-lg">
 
                     {/* Display ratings */}
                     <div className="ratings-section mb-8">
                         <h3 className="text-xl font-semibold mb-4">Ratings & Reviews</h3>
                         {service.ratings.length > 0 ? (
                             service.ratings.map((review, index) => (
-                                <div key={index} className="review md:flex items-center mb-6 p-4 border-b border-gray-300">
+                                <div key={index} className="review md:flex items-center mb-6 p-4 border-b ">
                                     <div>
                                         <div className="review-header flex items-center mb-4">
                                             <img src={review.photo} alt="User" className="user-photo w-12 h-12 rounded-full mr-4" />
                                             <div>
                                                 <h4 className="text-lg font-medium">{review.Name}</h4>
-                                                <span className="text-sm text-gray-500">{review.reviewDate}</span>
+                                                <span className="text-sm">{review.reviewDate}</span>
                                             </div>
                                         </div>
                                         <div className="review-body mb-4">
-                                            <p className="text-gray-800">{review.review}</p>
+                                            <p>{review.review}</p>
                                         </div>
                                         <div className="review-footer">
                                             <div className="rating flex">
@@ -137,7 +137,7 @@ const ServiceDetails = () => {
                                         </div>
                                     </div>
                                     {
-                                        user.email === review.email && <div className='md:w-16'>
+                                        user?.email === review.email && <div className='md:w-16'>
                                             <button className='btn btn-sm outline' onClick={handleEditReview}>My Reviews</button>
                                         </div>
                                     }

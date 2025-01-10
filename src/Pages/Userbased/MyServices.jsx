@@ -108,7 +108,7 @@ const MyServices = () => {
             />
             {/* Service Table */}
             <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-                <thead className="bg-gray-100">
+                <thead>
                     <tr>
                         <th className="py-2 px-4">Service Title</th>
                         <th className="py-2 px-4">Category</th>
@@ -123,11 +123,11 @@ const MyServices = () => {
                             <td className="py-2 px-4">{service.category}</td>
                             <td className="py-2 px-4">
                                 <button onClick={() => openModal(service)}
-                                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600 transition-colors" >
+                                    className="bg-blue-500 px-4 py-2 rounded mr-2 hover:bg-blue-600 transition-colors" >
                                     Update
                                 </button>
                                 <button onClick={() => handleDelete(service._id)}
-                                    className="bg-red-500 text-white px-4 py-2 rounded 
+                                    className="bg-red-500 px-4 py-2 rounded 
                                      hover:bg-red-600 transition-colors" > Delete
                                 </button>
                             </td>
@@ -137,7 +137,7 @@ const MyServices = () => {
             </table>
             {/* Update Modal */}
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal}
-                className="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-lg modal-scroll modal-box" >
+                className="p-6 rounded-lg shadow-lg mx-auto max-w-lg modal-scroll modal-box" >
                 {currentService && (<div>
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -160,7 +160,7 @@ const MyServices = () => {
                                 className="block font-bold mb-2">Service Image:</label>
                             <input type="text" id="image"
                                 defaultValue={currentService.image}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight 
                                             focus:outline-none focus:shadow-outline" required />
                         </div>
                         <div className="mb-4">
@@ -168,20 +168,20 @@ const MyServices = () => {
                                 className="block font-bold mb-2">Service Title:</label>
                             <input type="text" id="title"
                                 defaultValue={currentService.title}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+                                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight
                                                  focus:outline-none focus:shadow-outline" required />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="companyName" className="block font-bold mb-2">Company Name:</label>
                             <input type="text" id="companyName"
-                                defaultValue={currentService.companyName} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                                defaultValue={currentService.companyName} className="shadow appearance-none border rounded w-full py-2 px-3
                                                      leading-tight focus:outline-none focus:shadow-outline" required />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="website" className="block font-bold mb-2">Website:</label>
                             <input type="url" id="website"
                                 defaultValue={currentService.website}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3  
                                                         leading-tight focus:outline-none focus:shadow-outline" required />
                         </div>
                         <div className="mb-4">
@@ -189,7 +189,7 @@ const MyServices = () => {
                                 className="block font-bold mb-2">Description:</label>
                             <textarea id="description"
                                 defaultValue={currentService.description}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 
                                                              leading-tight focus:outline-none focus:shadow-outline" rows="3" required />
                         </div>
                         <div className="mb-4">
@@ -197,32 +197,32 @@ const MyServices = () => {
                                 className="block font-bold mb-2">Category:</label>
                             <input type="text" id="category"
                                 defaultValue={currentService.category}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 
                                                                  leading-tight focus:outline-none focus:shadow-outline" required />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="price" className="block font-bold mb-2">Price:</label>
                             <input type="number" id="price"
                                 defaultValue={currentService.price}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 
                                                                     leading-tight focus:outline-none focus:shadow-outline" min="0" required />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="addedDate" className="block font-bold mb-2">Added Date:</label>
                             <input type="text" id="addedDate"
                                 value={new Date(currentService.addedDate).toLocaleDateString()}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                                className="shadow appearance-none border rounded w-full py-2 px-3
                                                                            leading-tight focus:outline-none focus:shadow-outline" readOnly />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="userEmail" className="block font-bold mb-2">User Email:</label>
                             <input type="email" id="userEmail"
                                 value={currentService.userEmail}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 
                                                                               leading-tight focus:outline-none focus:shadow-outline" readOnly />
                         </div>
                         <button type="submit"
-                            className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none
+                            className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none
                                                                                focus:shadow-outline hover:bg-blue-700 transition-colors" > Save Changes
                         </button>
                     </form>

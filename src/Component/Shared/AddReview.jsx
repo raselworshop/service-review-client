@@ -50,16 +50,19 @@ const AddReview = ({ service, refetchServiceDetails }) => {
         setRating(value)
         setValue('rating', value)
     }
+    const handleRedirect=()=>{
+        toast.error('You are not logged in, please login first!');
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-                <label htmlFor="rating" className="text-gray-700 font-bold mb-2">Rating:</label>
+                <label htmlFor="rating" className="font-bold mb-2">Rating:</label>
                 <div className="flex items-center">
                     {[1, 2, 3, 4, 5].map((star) => (
                         <span
                             key={star}
                             onClick={() => handleRating(star)}
-                            className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                            className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-500'}`}
                         >
                             ★
                         </span>
@@ -69,22 +72,27 @@ const AddReview = ({ service, refetchServiceDetails }) => {
             </div>
             <div className="mb-4">
                 <label htmlFor="review"
-                    className="block text-gray-700 font-bold mb-2">Review:</label>
+                    className="block font-bold mb-2">Review:</label>
                 <textarea id="review"
                     {...register('review', { required: true })}
                     className="shadow appearance-none border rounded w-full 
-                py-2 px-3 text-gray-700 leading-tight focus:outline-none
+                py-2 px-3 leading-tight focus:outline-none
                  focus:shadow-outline" />
                 {errors.review && <span
                     className="text-red-500">Please provide a review</span>
                 }
             </div>
-            <button type="submit"
-                className="bg-blue-500 text-white font-bold py-2 px-4 
+            {!user ?<button onClick={handleRedirect}
+                className="bg-blue-500 font-bold py-2 px-4 
                  rounded focus:outline-none focus:shadow-outline
                   hover:bg-blue-700 transition-colors">
                 Add Review
-            </button>
+            </button> : <button type="submit"
+                className="bg-blue-500 font-bold py-2 px-4 
+                 rounded focus:outline-none focus:shadow-outline
+                  hover:bg-blue-700 transition-colors">
+                Add Review
+            </button>}
         </form>
     );
 };

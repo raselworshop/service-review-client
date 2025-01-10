@@ -15,7 +15,7 @@ const UserProfile = ({ user, handleUpdate }) => {
             className="w-24 h-24 rounded-full mb-4"
           />
           <h1 className="text-xl font-bold">{user.displayName || "Name not provided"}</h1>
-          <p className="text-gray-500">{user.email || "Email not provided"}</p>
+          <p>{user.email || "Email not provided"}</p>
         </div>
 
         {/* other info */}
@@ -38,7 +38,7 @@ const UserProfile = ({ user, handleUpdate }) => {
         <div className="mt-6">
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600"
+            className="btn-accent px-4 py-2 rounded-lg w-full btn hover:btn-primary"
           >
             Edit Profile
           </button>
@@ -94,13 +94,13 @@ const UserProfile = ({ user, handleUpdate }) => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 rounded-lg btn"
+                  className="px-4 py-2 rounded-lg btn hover:btn-primary"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 btn-accent btn rounded-lg hover:btn-primary"
                 >
                   Save
                 </button>

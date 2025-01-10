@@ -81,17 +81,17 @@ const AllServices = () => {
     if (loading) return <Spinner />
     if (error) return <div>Error: {error}</div>
     return (
-        <div className='max-w-7xl mx-auto my-5'>
+        <div className='max-w-full mx-auto my-5'>
             <div className='mb-4'>
                 <label htmlFor='category'
-                    className='block text-sm font-medium text-gray-700'>
+                    className='block text-sm font-medium'>
                     Select Category:
                 </label>
                 <select id='category'
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className='mt-1 block w-full py-2 px-3 border border-gray-300
-                 bg-white rounded-md shadow-sm focus:outline-none
+                  rounded-md shadow-sm focus:outline-none
                   focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' >
                     {categories.map((category) => (
                         <option key={category}
@@ -100,13 +100,13 @@ const AllServices = () => {
                     ))}
                 </select>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-5'>
                 {services.length > 0 ? (
                     services.map(service => (
                         <ServiceCard key={service._id} service={service} />
                     ))
                 ) : (
-                    <p className="text-center text-gray-500">No services found for this category.</p>
+                    <p className="text-center">No services found for this category.</p>
                 )}
             </div>
             <div>

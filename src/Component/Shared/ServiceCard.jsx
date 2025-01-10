@@ -10,19 +10,19 @@ const ServiceCard = ({ service }) => {
         alt={service.title}
       />
       <div className="p-4 flex flex-col flex-grow">
-        <h2 className="text-lg font-bold text-gray-800">{service.title}</h2>
-        <p className="text-gray-600 text-sm mt-2">
+        <h2 className="text-lg font-bold">{service.title}</h2>
+        <p className="text-sm mt-2">
           {service.description.length > 100
             ? service.description.slice(0, 100) + "..."
             : service.description}
         </p>
-        <p className="text-blue-500 font-semibold my-4">
+        <p className="text-blue-500 font-semibold my-1">
           Category: {service.category}
         </p>
-        <p className="text-blue-500 font-semibold my-4">
+        <p className="text-blue-500 font-semibold">
           Price: ${service.price}
         </p>
-        <Link to={`/service-details/${service._id}`} className="mt-auto text-center bg-blue-500 text-white px-4 py-2 rounded-md outline-blue-600 hover:bg-blue-600 transition-colors">
+        <Link to={`/service-details/${service._id}`} className="mt-auto text-center btn btn-accent px-4 py-2 rounded-md outline-blue-600 hover:btn-primary transition-colors">
           See Details
         </Link>
       </div>

@@ -12,26 +12,58 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [isMobileSearch, setIsMobileSearch] = useState(false)
-    const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li>
-            {location.pathname === '/' ? (
-                <a href="#services">Services</a>) : (
-                <NavLink to={'/services'}>Services</NavLink>
-            )
-            }
-        </li>
-        {user && <>
-            <li><NavLink to={'/addservice'}>Add Service</NavLink></li>
-            <li><NavLink to={'/my-reviews'}>My Reviews</NavLink></li>
-            <li><NavLink to={'/my-services'}>My Services</NavLink></li>
-        </>}
-        {!user && (<>
-            <li><NavLink to={'/signin'}>Sign In</NavLink></li>
-            <li><NavLink to={'/signup'}>Sign Up</NavLink></li>
+    const links = (
+        <>
+            <li>
+                <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/'}>
+                    Home
+                </NavLink>
+            </li>
+            <li>
+                {location.pathname === '/' ? (
+                    <a href="#services">Services</a>
+                ) : (
+                    <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/services'}>
+                        Services
+                    </NavLink>
+                )}
+            </li>
+            {user && (
+                <>
+                    <li>
+                        <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/addservice'}>
+                            Add Service
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/my-reviews'}>
+                            My Reviews
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/my-services'}>
+                            My Services
+                        </NavLink>
+                    </li>
+                </>
+            )}
+            {!user && (
+                <>
+                    <li>
+                        <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/signin'}>
+                            Sign In
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => (isActive ? 'btn btn-accent btn-sm hover:btn-primary' : 'hover:btn-primary hover:btn-sm hover:btn')} to={'/signup'}>
+                            Sign Up
+                        </NavLink>
+                    </li>
+                </>
+            )}
+            <ThemeToggle />
         </>
-        )}
-    </>
+    );
 
     const handleSignOut = () => {
         Swal.fire({
@@ -73,8 +105,8 @@ const Navbar = () => {
     }
     // console.log(search)
     return (
-        <div className="navbar bg-blue-700/20 fixed top-0 left-0 w-full z-50 backdrop-blur-md ">
-            <div className="navbar-start lg:pl-5">
+        <div className="navbar max-w-7xl fixed top-0 w-full mx-auto z-50 backdrop-blur-md base-100">
+            <div className="navbar-start w-4/5 mx-auto">
 
                 <div className='flex items-center justify-center'>
                     <Link to={'/'} className='flex items-center justify-center'>
@@ -119,7 +151,7 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end w-1/3 lg:pr-5">
+            <div className="navbar-end w-1/3">
                 {/* for mobile: search impleament */}
                 <div className='md:hidden mr-3'>
                     <button onClick={toggle}>
@@ -136,7 +168,7 @@ const Navbar = () => {
                     </button>
                 </div>
                 {isMobileSearch && (
-                    <div className="absolute top-16 left-0 w-full bg-white p-4 shadow-lg z-10">
+                    <div className="absolute top-16 left-0 w-full p-4 shadow-lg z-10">
                         <label className="input input-bordered w-full flex items-center gap-2">
                             <input
                                 type="text"
@@ -172,9 +204,9 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow">
                         {/* profile info  */}
-                        <div className='p-4 rounded my-2 bg-gray-500'>
+                        <div className='p-4 rounded my-2'>
                             <Link className=' flex items-center justify-between' to={'/profile'}> <span>{user ? user.displayName : "Profile"}</span>
-                                <img className='bg-white/20 w-8 h-8 rounded-full' src={user?.photoURL || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
+                                <img className='w-8 h-8 rounded-full' src={user?.photoURL || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="" />
                             </Link>
                         </div>
                         {links}
@@ -189,7 +221,7 @@ const Navbar = () => {
                             }
                         </Link>
                         {user && (
-                            <div className='hidden group-hover:block absolute top-8 right-0 bg-white shadow-lg rounded-lg p-4 z-10'>
+                            <div className='hidden group-hover:block absolute top-8 right-0 shadow-lg rounded-lg p-4 z-10'>
                                 <div className='flex items-center justify-between mb-2 tooltip tooltip-left' data-tip="Click to move profile page">
                                     <span>{user?.displayName}</span>
                                     <Link to={'/profile'}>
@@ -206,7 +238,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div >
-            <ThemeToggle/>
+
         </div >
     );
 };

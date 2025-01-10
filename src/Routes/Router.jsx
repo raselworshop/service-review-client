@@ -52,9 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'services',
-        element: <PrivateRoute>
-          <AllServices></AllServices>
-        </PrivateRoute>,
+        element: <AllServices></AllServices>,
         title: "All Services - Service Reviews", 
         loader: async ()=>{
           const response = await axios.get(`${import.meta.env.VITE_PROD_API_URL}/servicesCount`);
@@ -63,9 +61,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'service-details/:serviceId',
-        element: <PrivateRoute>
-          <ServiceDetails></ServiceDetails>
-        </PrivateRoute>,
+        element:  <ServiceDetails></ServiceDetails>,
+        
         title: "Service Details - Service Reviews",
       },
       {
