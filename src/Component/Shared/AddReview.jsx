@@ -13,36 +13,41 @@ const AddReview = ({ service, refetchServiceDetails }) => {
     const currentDate = format(new Date(), 'yyyy-MM-dd')
 
     const onSubmit = async (data) => {
-        const toastId = toast.loading('Sumitting your review...')
-        try {
-            const reviewData = {
-                ...data,
-                reviewDate: currentDate,
-                review : data.review,
-                rating: rating,
-                serviceTitle: service.title, //here not adding in backend
-                email : user.email,
-                photo: user.photoURL || user.photo,
-                Name: user.displayName || user.name,
-                serviceId: service._id,
+        if (!user) {
+            return toast.error("Please login to give a review!")
+        } else {
+            const toastId = toast.loading('Sumitting your review...')
+            try {
+                const reviewData = {
+                    ...data,
+                    reviewDate: currentDate,
+                    review: data.review,
+                    rating: rating,
+                    serviceTitle: service.title, //here not adding in backend
+                    email: user.email,
+                    photo: user.photoURL || user.photo,
+                    Name: user.displayName || user.name,
+                    serviceId: service._id,
+                }
+                // console.log(service.title) // is ok
+                const res = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/reviews`, reviewData)
+                if (res.status === 201) {
+                    // console.log('review add successful')
+
+                }
+                const response = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/services/rating/${service._id}`, reviewData);
+                if (response.status === 201) {
+                    // console.log('rating added successfully')
+                }
+                refetchServiceDetails()
+                toast.dismiss(toastId)
+                toast.success('Review added successfully!');
+                reset();
+            } catch (error) {
+                toast.dismiss(toastId)
+                toast.error(error.message);
+                // console.log(error.message)
             }
-            // console.log(service.title) // is ok
-            const res = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/reviews`, reviewData)
-            if (res.status === 201) {
-                // console.log('review add successful')
-                
-            }
-            const response = await axios.post(`${import.meta.env.VITE_PROD_API_URL}/services/rating/${service._id}`, reviewData);
-            if (response.status === 201) {
-                // console.log('rating added successfully')
-            }
-            refetchServiceDetails()
-            toast.dismiss(toastId)
-            toast.success('Review added successfully!');
-            reset();
-        } catch (error) {
-            toast.dismiss(toastId)
-            toast.error(error.message);
         }
     };
 
@@ -50,9 +55,9 @@ const AddReview = ({ service, refetchServiceDetails }) => {
         setRating(value)
         setValue('rating', value)
     }
-    const handleRedirect=()=>{
-        toast.error('You are not logged in, please login first!');
-    }
+    // const handleRedirect = () => {
+    //     toast.error('You are not logged in, please login first!');
+    // }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
@@ -82,7 +87,7 @@ const AddReview = ({ service, refetchServiceDetails }) => {
                     className="text-red-500">Please provide a review</span>
                 }
             </div>
-            {!user ?<button onClick={handleRedirect}
+            {!user ? <button
                 className="bg-blue-500 font-bold py-2 px-4 
                  rounded focus:outline-none focus:shadow-outline
                   hover:bg-blue-700 transition-colors">

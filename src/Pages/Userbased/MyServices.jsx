@@ -97,7 +97,7 @@ const MyServices = () => {
     if (!services.length) return <div>No services found</div>;
 
     return (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto py-6">
             <h2 className="text-2xl font-bold mb-6">My Services: "{services.length}"</h2>
             {/* Search Input */}
             <input type="text" placeholder="Search Services..."

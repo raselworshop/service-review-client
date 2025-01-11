@@ -53,7 +53,7 @@ const ServiceDetails = () => {
     if (loading || !service) return <Spinner />;
     if (error) return <div>Error: {error}</div>;
     return (
-        <div className='container mx-auto p-6 '>
+        <div className='container mx-auto py-6 '>
             <div className="md:flex items-center justify-between gap-5">
                 <Toaster />
                 <div className='md:w-2/3'>

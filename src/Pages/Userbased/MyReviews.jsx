@@ -106,7 +106,7 @@ const MyReviews = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto py-6">
       <h2 className="text-2xl font-bold mb-6">My Reviews</h2>
       {reviews.map(review => (
         <div key={review._id} className="mb-4 p-4 rounded-lg shadow-md">

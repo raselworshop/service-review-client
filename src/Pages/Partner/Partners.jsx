@@ -35,6 +35,14 @@ const Partners = () => {
         })
     }
 
+    const handlereadMore=()=>{
+        Swal.fire({
+            title: "We got you!",
+            text: "We will be with you.",
+            icon: "success"
+        });
+    }
+
     return (
         <div className='container mx-auto'>
             <h2 className='my-4 text-3xl lg:text-5xl font-semibold'>Meet Our Partner Program</h2>
@@ -42,7 +50,7 @@ const Partners = () => {
                 <div className='p-10 flex flex-col items-center flex-1'>
                     <h3 className='text-2xl lg:text-4xl my-3 font-semibold'>Partners Relations</h3>
                     <p>Our Vison is to be the Universal Sign of Truth</p>
-                    <button className='btn btn-info my-3 w-3/4' onClick={handleProve}>
+                    <button className='btn btn-accent hover:btn-primary  my-3 w-3/4' onClick={handleProve}>
                         Prove To Show
                     </button>
                 </div>
@@ -111,7 +119,7 @@ const Partners = () => {
                     <h2 className="text-3xl font-bold mb-4">A purpose-driven business</h2>
                     <p className="mb-6"> "Our vision is to become the universal symbol of trust, empowering consumers to make confident, informed buying decisions while allowing businesses to credibly signal the quality of their services and to gain actionable insights to improve them."
                     </p>
-                    <button className="btn btn-secondary btn-outline">Read more</button>
+                    <button onClick={handlereadMore} className="btn btn-accent hover:btn-primary">Read more</button>
                 </div>
                 <div className="relative w-full h-64 lg:w-1/2 lg:h-auto px-4 mt-8 lg:mt-0">
                     <img src="https://i.ibb.co/7RH478R/working-meeting-asian-colleagues.jpg" alt="CEO Adrian Blair" className="object-cover w-full h-full rounded-lg" />

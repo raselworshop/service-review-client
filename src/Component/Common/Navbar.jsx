@@ -12,6 +12,38 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [isMobileSearch, setIsMobileSearch] = useState(false)
+
+    const handleSignOut = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Log Out!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                signOutUser()
+                    .then(() => {
+                        Swal.fire({
+                            title: "Logged Out!",
+                            text: "You're logged out.",
+                            icon: "success"
+                        });
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: `${error.message}`,
+                            icon: "error"
+                        });
+                    })
+            }
+        });
+    }
+
     const links = (
         <>
             <li>
@@ -61,40 +93,17 @@ const Navbar = () => {
                     </li>
                 </>
             )}
-            <ThemeToggle />
+            <div className='flex justify-between items-center'>
+                {user && <li className='lg:hidden'>
+                    <button className='btn btn-accent hover:btn-primary btn-sm'
+                        onClick={handleSignOut}>
+                        Logout
+                    </button>
+                </li>}
+                <ThemeToggle className="lg:ml-2 p-3 lg:m-0" />
+            </div>
         </>
     );
-
-    const handleSignOut = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Log Out!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                signOutUser()
-                    .then(() => {
-                        Swal.fire({
-                            title: "Logged Out!",
-                            text: "You're logged out.",
-                            icon: "success"
-                        });
-                        navigate('/')
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: "Error!",
-                            text: `${error.message}`,
-                            icon: "error"
-                        });
-                    })
-            }
-        });
-    }
     const handleSearch = () => {
         if (search.trim() !== "") {
             navigate(`/search?query=${search}`)
@@ -105,10 +114,10 @@ const Navbar = () => {
     }
     // console.log(search)
     return (
-        <div className="navbar max-w-7xl fixed top-0 w-full mx-auto z-50 backdrop-blur-md base-100">
+        <div className="navbar max-w-7xl fixed top-0 w-full mx-auto z-50 backdrop-blur-md bg-accent/50">
             <div className="navbar-start w-4/5 mx-auto">
 
-                <div className='flex items-center justify-center'>
+                <div className='flex items-center justify-center mb-2'>
                     <Link to={'/'} className='flex items-center justify-center'>
                         <span><FaCloud className='text-green-700 text-2xl lg:hidden mr-2' /> </span>
                         <span className="hover mr-2 font-bold text-2xl  md:text-3xl lg:text-4xl">
@@ -147,7 +156,7 @@ const Navbar = () => {
                         </button>
                     </label>
                 </div>
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-2 space-x-3">
                     {links}
                 </ul>
             </div>
@@ -221,7 +230,7 @@ const Navbar = () => {
                             }
                         </Link>
                         {user && (
-                            <div className='hidden group-hover:block absolute top-8 right-0 shadow-lg rounded-lg p-4 z-10'>
+                            <div className='hidden group-hover:block absolute top-8 right-0 shadow-lg rounded-lg p-4 z-50 base-100 backdrop-blur-xl'>
                                 <div className='flex items-center justify-between mb-2 tooltip tooltip-left' data-tip="Click to move profile page">
                                     <span>{user?.displayName}</span>
                                     <Link to={'/profile'}>
@@ -229,7 +238,7 @@ const Navbar = () => {
                                             src={user?.photoURL || "https://i.ibb.co/9r0LmCV/boy1.png"} alt="User Profile" />
                                     </Link>
                                 </div>
-                                <button className='btn btn-danger'
+                                <button className='btn btn-accent btn-sm hover:btn-primary'
                                     onClick={handleSignOut}>
                                     Logout
                                 </button>
