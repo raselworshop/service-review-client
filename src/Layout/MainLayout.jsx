@@ -11,11 +11,11 @@ const MainLayout = () => {
     const currentTitle = location.state?.title || `${currentRoute.charAt(0).toUpperCase() + currentRoute.slice(1)} || Service Reviews Sytem`; 
     useTitle(currentTitle)
     return (
-        <div className='max-w-7xl mx-auto'>
+        <div>
             <nav>
                 <Navbar></Navbar>
             </nav>
-            <main className='max-w-[1349px] mx-auto min-h-[calc(100vh-246px)] pt-16'>
+            <main className='max-w-7xl mx-auto min-h-[calc(100vh-246px)] pt-16'>
                 <Outlet></Outlet>
             </main>
             <footer>

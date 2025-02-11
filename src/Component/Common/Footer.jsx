@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 
 const Footer = () => {
     return (
-        <footer className="bg-base-200 text-base-content py-10">
+        <footer className="bg-base-200 text-base-content py-10 lg:pl-8">
             <main className='footer'>
                 <aside>
                     <div className='flex items-center justify-center'>
