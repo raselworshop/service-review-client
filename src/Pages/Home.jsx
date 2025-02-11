@@ -5,6 +5,7 @@ import PlatformStats from '../Component/Shared/PlatFormState';
 import WhyChoose from '../Component/Common/WhyChoose';
 import MeetOurPartners from '../Component/Common/partner/MeetOurPartners';
 import useTitle from '../Hooks/useTitle';
+import ServicePromo from '../Component/Common/ServicePromo';
 
 const Home = () => {
     useTitle("Home - Services Reviews System")
@@ -24,6 +25,9 @@ const Home = () => {
             </section>
             <section className='my-8'>
                 <WhyChoose></WhyChoose>
+            </section>
+            <section>
+                <ServicePromo/>
             </section>
         </div>
     );
