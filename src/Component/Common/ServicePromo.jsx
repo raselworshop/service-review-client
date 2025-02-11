@@ -1,7 +1,12 @@
 import React from "react";
+import UseAuth from "../../Hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const ServicePromo = () => {
-
+    const { user } = UseAuth()
+    const handleListing=()=>{
+        toast(user ? "Congratulations! You will be notified letter by email." : "Please log in to continue.")
+    }
   return (
     <section className="bg-white py-12 px-6 md:px-16 flex flex-col md:flex-row items-center">
       {/* Left Content */}
