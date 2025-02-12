@@ -32,61 +32,25 @@ const PlatformStats = () => {
         <div className="max-w-7xl mx-auto" ref={statsRef}>
             <div className="text-center">
                 <h2 className="text-3xl font-bold my-6">Platform Statistics</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
-
-                    {/* Total Users */}
-                    <div className="p-6 shadow-lg rounded-lg">
-                        <h3 className="text-xl font-semibold">Users</h3>
-                        {isVisible && (
-                            <CountUp
-                                start={0}
-                                end={stats.users}
-                                duration={2.5}
-                                enableScrollSpy
-                                suffix='+'
-                                // scrollSpyOnce
-                                separator=","
-                                className="text-4xl font-bold text-custom-accent"
-                            />
-                        )}
-                        <p className="mt-2">Registered Users</p>
-                    </div>
-
-                    {/* Total Reviews */}
-                    <div className="p-6 shadow-lg rounded-lg">
-                        <h3 className="text-xl font-semibold">Reviews</h3>
-                        {isVisible && (
-                            <CountUp
-                                start={0}
-                                end={stats.reviews}
-                                duration={2.5}
-                                separator=","
-                                enableScrollSpy
-                                suffix='+'
-                                // scrollSpyOnce
-                                className="text-4xl font-bold text-custom-accent"
-                            />
-                        )}
-                        <p className="mt-2">Reviews Posted</p>
-                    </div>
-
-                    {/* Total Services */}
-                    <div className="p-6 shadow-lg rounded-lg">
-                        <h3 className="text-xl  font-semibold">Services</h3>
-                        {isVisible && (
-                            <CountUp
-                                start={0}
-                                end={stats.services}
-                                duration={2.5}
-                                separator=","
-                                suffix='+'
-                                enableScrollSpy
-                                // scrollSpyOnce
-                                className="text-4xl font-bold text-custom-accent"
-                            />
-                        )}
-                        <p className=" mt-2">Services Available</p>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {Object.entries(stats).map(([key, value]) => (
+                        <div key={key} className="relative p-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg rounded-xl overflow-hidden transform transition duration-500 hover:scale-105">
+                            <h3 className="text-2xl font-semibold capitalize">{key}</h3>
+                            {isVisible && (
+                                <CountUp
+                                    start={0}
+                                    end={value}
+                                    duration={2.5}
+                                    separator=","  
+                                    suffix="+"
+                                    className="text-5xl font-extrabold mt-2"
+                                />
+                            )}
+                            <p className="mt-2 text-lg opacity-80">
+                                {key === 'users' ? 'Registered Users' : key === 'reviews' ? 'Reviews Posted' : 'Services Available'}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
