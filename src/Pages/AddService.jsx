@@ -52,7 +52,7 @@ const AddService = () => {
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1 }}
-                    className='w-full md:w-1/2 bg-white p-6 rounded-xl shadow-lg border border-gray-200'
+                    className='w-full md:w-1/2 dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-500 dark:border-gray-200'
                 >
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* Input Fields */}
@@ -65,14 +65,14 @@ const AddService = () => {
                             { id: "price", label: "Price", type: "number" }
                         ].map(({ id, label, type }) => (
                             <div key={id}>
-                                <label htmlFor={id} className="block font-semibold text-gray-700">
+                                <label htmlFor={id} className="block font-semibold">
                                     {label}:
                                 </label>
                                 <input
                                     type={type}
                                     id={id}
                                     {...register(id, { required: true })}
-                                    className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                                    className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-700 bg-slate-400 text-slate-900 dark:bg-gray-900 focus:ring focus:ring-blue-200 transition-all"
                                 />
                                 {errors[id] && <span className="text-red-500 text-sm">This field is required</span>}
                             </div>
@@ -80,24 +80,24 @@ const AddService = () => {
 
                         {/* Description */}
                         <div>
-                            <label htmlFor="description" className="block font-semibold text-gray-700">Description:</label>
+                            <label htmlFor="description" className="block font-semibold">Description:</label>
                             <textarea
                                 id="description"
                                 {...register('description', { required: true })}
-                                className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                                className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-500 bg-slate-400 text-slate-900 dark:bg-gray-900 focus:ring focus:ring-blue-200 transition-all"
                             />
                             {errors.description && <span className="text-red-500 text-sm">This field is required</span>}
                         </div>
 
                         {/* Added Date (Read Only) */}
                         <div>
-                            <label htmlFor="addedDate" className="block font-semibold text-gray-700">Added Date:</label>
+                            <label htmlFor="addedDate" className="block font-semibold ">Added Date:</label>
                             <input
                                 type="text"
                                 id="addedDate"
                                 value={currentDate}
                                 readOnly
-                                className="w-full py-2 px-3 border rounded-lg shadow-sm bg-gray-100 cursor-not-allowed"
+                                className="w-full py-2 px-3 border bg-slate-400 text-slate-900 dark:bg-gray-900 rounded-lg shadow-sm cursor-not-allowed"
                             />
                         </div>
 

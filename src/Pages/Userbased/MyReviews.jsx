@@ -102,7 +102,7 @@ const MyReviews = () => {
       });
   };
 
-  if (loading) return <Spinner />;
+  if (loading) return <div className='flex items-center justify-center'><Spinner /></div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -115,20 +115,20 @@ const MyReviews = () => {
           <p className="text-yellow-500 mb-2">Rating: {review.rating}</p>
           <button
             onClick={() => openModal(review)}
-            className="bg-blue-500 px-4 py-2 rounded mr-2"
+            className="bg-blue-500 hover:bg-blue-700 transition-all px-4 py-2 rounded mr-2"
           >
             Update
           </button>
           <button
           
             onClick={() => handleDelete(review._id)}
-            className="bg-red-500 px-4 py-2 rounded"
+            className="bg-red-500 hover:bg-red-600 transition-all px-4 py-2 rounded"
           >
             Delete
           </button>
         </div>
       ))}
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className={'max-w-md mx-auto'}>
         {currentReview && (
           <form onSubmit={(e) => {
             e.preventDefault();
