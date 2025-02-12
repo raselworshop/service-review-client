@@ -4,19 +4,19 @@ import { useForm } from 'react-hook-form';
 import UseAuth from '../Hooks/UseAuth';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
-import Brand from '/public/lottiee/brand.json'
+import Brand from '/public/lottiee/brand.json';
 import Lottie from 'lottie-react';
-import { motion } from "motion/react"
+import { motion } from "framer-motion";
 import UseAxiosSecure from '../Hooks/UseAxiosSecure';
 
 const AddService = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = UseAuth();
-    const axiosSecure = UseAxiosSecure()
-    const currentDate = format(new Date(), 'yyyy-MM-dd')
+    const axiosSecure = UseAxiosSecure();
+    const currentDate = format(new Date(), 'yyyy-MM-dd');
+
     const onSubmit = async (data) => {
         try {
-            // const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/add/service`, {
             const response = await axiosSecure.post(`/user/add/service`, {
                 ...data,
                 userEmail: user.email,
@@ -25,127 +25,104 @@ const AddService = () => {
                 addedDate: currentDate,
                 ratings: [],
             });
-            toast.success('Service added successfully!')
+
             if (response.status === 201) {
-                // console.log(response)
-                toast.success('Service added successfully!')
+                toast.success('✅ Service added successfully!');
             }
         } catch (error) {
-            // console.log('Failed to add service, please try again', error)
-            toast.error(`${error ? error.message : "Failed to add service, please try again"}`)
+            toast.error(`❌ ${error.message || "Failed to add service, please try again."}`);
         }
-    }
-    return (
-        <div className="container mx-auto py-5">
-            <motion.h2
-                animate={{ x: 50, color:['#33f786'] }}
-                transition={{ duration: 3, delay: 1.5, ease: "linear", repeat:Infinity }}
-                className="text-2xl font-bold mb-6 text-center">Add New Service
-            </motion.h2>
-            <div className='md:flex items-center justify-between'>
-                <div className='w-full md:w-2/4'>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="mb-4">
-                            <label htmlFor="image"
-                                className="block font-bold mb-2">
-                                Service Image URL:
-                            </label>
-                            <input type="text" id="image"
-                                {...register('image', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3
-                     leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.image && <span
-                                className="text-red-500">This field is required
-                            </span>}
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="title"
-                                className="block font-bold mb-2">
-                                Service Title:
-                            </label>
-                            <input type="text" id="title"
-                                {...register('title', { required: true })}
-                                className="shadow appearance-none border rounded w-full 
-                            py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.title && <span
-                                className="text-red-500">This field is required</span>
-                            } </div> <div className="mb-4">
-                            <label htmlFor="companyName"
-                                className="block font-bold mb-2">Company Name:</label>
-                            <input type="text" id="companyName"
-                                {...register('companyName', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 
-                             leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.companyName && <span
-                                className="text-red-500">This field is required</span>
-                            } </div>
-                        <div className="mb-4">
-                            <label htmlFor="website"
-                                className="block font-bold mb-2">Website:</label>
-                            <input type="text" id="website"
-                                {...register('website', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 
-                                leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.website && <span
-                                className="text-red-500">This field is required</span>
-                            }
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="description"
-                                className="block font-bold mb-2">Description:</label>
-                            <textarea id="description"
-                                {...register('description', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3
-                                     leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.description && <span
-                                className="text-red-500">This field is required</span>
-                            }
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="category"
-                                className="block font-bold mb-2">Category:</label>
-                            <input type="text" id="category"
-                                {...register('category', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 
-                                        leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.category && <span
-                                className="text-red-500">This field is required</span>
-                            }
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="price"
-                                className="block font-bold mb-2">Price:</label>
-                            <input type="number" id="price"
-                                {...register('price', { required: true })}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
-                                            leading-tight focus:outline-none focus:shadow-outline"/>
-                            {errors.price && <span
-                                className="text-red-500">This field is required</span>
-                            }
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="addedDate"
-                                className="block font-bold mb-2">Added Date:</label>
-                            <input type="text"
-                                id="addedDate"
-                                value={format(new Date(), 'yyyy-MM-dd')}
-                                readOnly
-                                className="shadow appearance-none border rounded w-full py-2 px-3
-                     leading-tight focus:outline-none focus:shadow-outline"/>
-                        </div>
-                        <button type="submit"
-                            className="bg-blue-500 font-bold py-2 px-4 rounded
-                                              focus:outline-none focus:shadow-outline
-                                               hover:bg-blue-700 transition-colors">
-                            Add Service
-                        </button>
-                    </form>
-                </div>
-                <div className='w-full md:w-2/4'>
-                    <Lottie animationData={Brand} />
-                </div>
-            </div>
+    };
 
+    return (
+        <div className="container mx-auto py-10 px-4">
+            <motion.h2
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-3xl font-bold text-center text-blue-600 mb-8"
+            >
+                Add New Service
+            </motion.h2>
+
+            <div className='md:flex items-center justify-between gap-8'>
+                
+                {/* Form Section */}
+                <motion.div 
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                    className='w-full md:w-1/2 bg-white p-6 rounded-xl shadow-lg border border-gray-200'
+                >
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                        {/* Input Fields */}
+                        {[
+                            { id: "image", label: "Service Image URL", type: "text" },
+                            { id: "title", label: "Service Title", type: "text" },
+                            { id: "companyName", label: "Company Name", type: "text" },
+                            { id: "website", label: "Website", type: "text" },
+                            { id: "category", label: "Category", type: "text" },
+                            { id: "price", label: "Price", type: "number" }
+                        ].map(({ id, label, type }) => (
+                            <div key={id}>
+                                <label htmlFor={id} className="block font-semibold text-gray-700">
+                                    {label}:
+                                </label>
+                                <input
+                                    type={type}
+                                    id={id}
+                                    {...register(id, { required: true })}
+                                    className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                                />
+                                {errors[id] && <span className="text-red-500 text-sm">This field is required</span>}
+                            </div>
+                        ))}
+
+                        {/* Description */}
+                        <div>
+                            <label htmlFor="description" className="block font-semibold text-gray-700">Description:</label>
+                            <textarea
+                                id="description"
+                                {...register('description', { required: true })}
+                                className="w-full py-2 px-3 border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all"
+                            />
+                            {errors.description && <span className="text-red-500 text-sm">This field is required</span>}
+                        </div>
+
+                        {/* Added Date (Read Only) */}
+                        <div>
+                            <label htmlFor="addedDate" className="block font-semibold text-gray-700">Added Date:</label>
+                            <input
+                                type="text"
+                                id="addedDate"
+                                value={currentDate}
+                                readOnly
+                                className="w-full py-2 px-3 border rounded-lg shadow-sm bg-gray-100 cursor-not-allowed"
+                            />
+                        </div>
+
+                        {/* Submit Button */}
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            type="submit"
+                            className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition-all"
+                        >
+                            Add Service
+                        </motion.button>
+                    </form>
+                </motion.div>
+
+                {/* Animation Section */}
+                <motion.div 
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                    className='w-full md:w-1/2 flex justify-center'
+                >
+                    <Lottie animationData={Brand} className="w-full max-w-md" />
+                </motion.div>
+            </div>
         </div>
     );
 };
